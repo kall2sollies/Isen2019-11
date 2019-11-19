@@ -7,6 +7,7 @@ namespace Isen.Dotnet.Library
     {
         // stockage interne de la liste
         private string[] _values;
+        public string[] Values => _values;
         // Dimension de la liste
         public int Count => _values.Length;
  

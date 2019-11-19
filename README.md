@@ -120,3 +120,12 @@ Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent
   `dotnet add reference ../../src/Isen.Dotnet.Library`
 * Ajouter le projet de tests au fichier sln : depuis la racine du projet : `dotnet sln add tests/Isen.Dotnet.UnitTests/`
 * Renommer la classe `UnitTest1` en `MyLibraryStringTests`
+* Ecrire 2 tests bidon (un qui réussit, un qui plante)
+* Lancer les tests, depuis le répertoire du projet de tests, avec `dotnet test`  
+
+### Ajout de méthodes de tests unitaires
+
+* Créer 2 méthodes statiques pour générer un tableau primitif de référence, et une liste créée à partir de ce tableau.
+* Tester `Count()` en vérifiant que les 2 dimensions sont les mêmes (`Assert.Equal()`).
+* Dans la classe MyCollection, ajouter un getter pour rendre Values visible.
+* Tester `Add()` en utilisant le `Assert.Equal(array, array)`  
