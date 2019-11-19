@@ -136,7 +136,7 @@ namespace Isen.Dotnet.UnitTests
         {
             var myCollection = BuildTestList();
             myCollection.Clear();
-            Assert.Equal(0, myCollection.Count);
+            Assert.Empty(myCollection);
         }
 
         [Fact]
