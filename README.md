@@ -129,3 +129,6 @@ Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent
 * Tester `Count()` en vérifiant que les 2 dimensions sont les mêmes (`Assert.Equal()`).
 * Dans la classe MyCollection, ajouter un getter pour rendre Values visible.
 * Tester `Add()` en utilisant le `Assert.Equal(array, array)`  
+* Tester 'IndexOf()` au début, au milieu, à la fin
+* Tester l'accesseur indexeur `this[index]` au début, au milieu, à la fin.
+* Tester `RemoveAt()` en comparant les états successifs de la liste avec des arrays statiques qui representent les états attendus.
