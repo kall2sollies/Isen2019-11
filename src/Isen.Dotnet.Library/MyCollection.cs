@@ -20,6 +20,33 @@ namespace Isen.Dotnet.Library
             _values = array;
         }
 
+        public void Add(string item)
+        {
+            var tmpArray = new string[Count + 1];
+            for (var i = 0 ; i < Count ; i++)
+            {
+                tmpArray[i] = _values[i];
+            }
+            tmpArray[Count] = item;
+            _values = tmpArray;
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (_values?.Length == null ||
+                index > Count ||
+                index < 0)
+                throw new IndexOutOfRangeException();
+            
+            var tmpArray = new string[Count - 1];
+            for(var i = 0 ; i < tmpArray.Length ; i++)
+            {
+                tmpArray[i] =
+                    _values[i < index ? i : i + 1];
+            }
+            _values = tmpArray;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();

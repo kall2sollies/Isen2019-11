@@ -7,17 +7,27 @@ namespace Isen.Dotnet.ConsoleApp
     {
         static void Main(string[] args)
         {
-            // Instancier un tableau
-            var array = new string[]
-            {
-                 "Hello", 
-                 "world", 
-                 "of", 
-                 "useless", 
-                 "arrays"
-            };
-            var myCollection = new MyCollection(array);
+            var myCollection = new MyCollection();
+            myCollection.Add("Hello");
+            myCollection.Add("world");
+            myCollection.Add("of");
+            myCollection.Add("useless");
+            myCollection.Add("arrays");
+
             Console.WriteLine(myCollection);
+            // Hello world of useless arrays
+
+            myCollection.RemoveAt(3); // Remove au milieu
+            Console.WriteLine(myCollection);
+            // Hello world of arrays
+
+            myCollection.RemoveAt(3); // Remove à la fin
+            Console.WriteLine(myCollection);
+            // Hello world of
+
+            myCollection.RemoveAt(0); // Remove au début
+            Console.WriteLine(myCollection);
+            // world of
         }
     }
 }

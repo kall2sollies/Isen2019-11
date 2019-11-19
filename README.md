@@ -93,3 +93,9 @@ On va utiliser un tableau natif (`string []`) comme structure de stockage intern
   * Surcharge avec tableau en paramètre
 * Affichage : override de ToString, construction d'une chaine avec tous les éléments en utilisant `StringBuilder`
 * Tester cet état de la classe dans le projet console.
+
+### Méthode Add(value)
+Coder cette méthode. La tester.
+
+### Méthode RemoveAt(index)
+Coder cette méthode. La tester.
