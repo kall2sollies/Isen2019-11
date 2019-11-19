@@ -110,3 +110,13 @@ Coder cette méthode. La tester.
 Coder l'accesseur qui va permettre d'accéder au valeur de la liste comme si c'était un tableau primitif :
 `myCollection[3]`  
 Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent `this[i]`.  
+
+### Ajout d'un projet de tests unitaires
+
+* Créer un dossier `tests/` au niveau de `src/` (donc à la racine) 
+* Dans ce dossier, créer `Isen.Dotnet.UnitTests/` et naviguer dedans avec le terminal.
+* Créer le projet de tests avec `dotnet new xunit`
+* Référencer Library dans le projet de tests : 
+  `dotnet add reference ../../src/Isen.Dotnet.Library`
+* Ajouter le projet de tests au fichier sln : depuis la racine du projet : `dotnet sln add tests/Isen.Dotnet.UnitTests/`
+* Renommer la classe `UnitTest1` en `MyLibraryStringTests`
