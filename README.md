@@ -94,8 +94,14 @@ On va utiliser un tableau natif (`string []`) comme structure de stockage intern
 * Affichage : override de ToString, construction d'une chaine avec tous les éléments en utilisant `StringBuilder`
 * Tester cet état de la classe dans le projet console.
 
-### Méthode Add(value)
+### Méthode Add(item)
+Cette méthode ajoute un élément passé en argument à la fin de la liste.  
 Coder cette méthode. La tester.
 
 ### Méthode RemoveAt(index)
+Cette méthode retire l'élément situé à l'index passé en argument. Index 0-based.  
 Coder cette méthode. La tester.
+
+### Méthode IndexOf(item)
+Cette méthode renvoie l'index 0-based de l'élément passé en argument (ou le premier, si l'élément y est plusieurs fois).  
+Coder cette méthode. La tester.  

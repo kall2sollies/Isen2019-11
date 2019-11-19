@@ -17,6 +17,14 @@ namespace Isen.Dotnet.ConsoleApp
             Console.WriteLine(myCollection);
             // Hello world of useless arrays
 
+            var indexOfWorld = myCollection.IndexOf("world");
+            Console.WriteLine($"Index of 'world' is {indexOfWorld}");
+            // 1
+
+            var indexOfFoo = myCollection.IndexOf("foo");
+            Console.WriteLine($"Index of 'foo' is {indexOfFoo}");
+            // -1
+
             myCollection.RemoveAt(3); // Remove au milieu
             Console.WriteLine(myCollection);
             // Hello world of arrays

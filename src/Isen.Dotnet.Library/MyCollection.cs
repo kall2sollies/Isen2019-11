@@ -47,6 +47,20 @@ namespace Isen.Dotnet.Library
             _values = tmpArray;
         }
 
+        public int IndexOf(string item)
+        {
+            var index = -1;
+            for(var i = 0 ; i < Count ; i++)
+            {
+                if(_values[i].Equals(item))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
