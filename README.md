@@ -68,3 +68,14 @@ La hiérarchie est :
   Le fichier sln doit contenir des références aux 2 projets (ConsoleApp et Library).  
 
   Le fichier src/Isen.DotNet.ConsoleApp/Isen.DotNet.ConsoleApp.csproj doit contenir une référence à Library.
+
+# Le C#
+
+## Créer une classe Hello
+Dans le projet Library, créer Hello.cs. :
+* using, namespace, class
+* Propriété avec accesseur implicite
+* Constructeur
+* Méthode Greet()
+
+Dans le projet console, instancier la classe Hello (il faut un using) et envoyer la sortie de la méthode Greet vers la console.  
