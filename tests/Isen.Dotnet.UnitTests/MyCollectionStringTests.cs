@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Isen.Dotnet.UnitTests
 {
-    public class MyLibraryStringTests
+    public class MyCollectionStringTests
     {
         private static string [] TestArray => 
             new string[] { "Hello", "world", "of", "useless", "arrays" };
-        private static MyCollection BuildTestList()
+        private static MyCollection<string> BuildTestList()
         {
-            var myCollection = new MyCollection();
+            var myCollection = new MyCollection<string>();
             foreach (var item in TestArray) myCollection.Add(item);
             return myCollection;
         }
@@ -69,7 +69,7 @@ namespace Isen.Dotnet.UnitTests
             var testArray = new string[] {
                  "Hello", "world", "of", "of", 
                  "useless", "arrays" };
-            var myCollection = new MyCollection();
+            var myCollection = new MyCollection<string>();
             foreach (var item in testArray) myCollection.Add(item);
 
             // Remove à la fin

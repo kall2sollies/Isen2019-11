@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Isen.Dotnet.Library
 {
-    public class MyCollection : IList<string>
+    public class MyCollection<T> : IList<T>
     {
         // stockage interne de la liste
-        private string[] _values;
-        public string[] Values => _values;
+        private T[] _values;
+        public T[] Values => _values;
         // Dimension de la liste
         public int Count => _values.Length;
 
@@ -17,22 +17,22 @@ namespace Isen.Dotnet.Library
         {
             Clear();
         }
-        public MyCollection(string [] array)
+        public MyCollection(T [] array)
         {
             _values = array;
         }
 
         // syntaxe myCollection[2]
-        public string this[int index]
+        public T this[int index]
         {
             get => _values[index];
             set => _values[index] = value;
         }
 
         // Ajoute l'élément en fin de liste
-        public void Add(string item)
+        public void Add(T item)
         {
-            var tmpArray = new string[Count + 1];
+            var tmpArray = new T[Count + 1];
             for (var i = 0 ; i < Count ; i++)
             {
                 tmpArray[i] = this[i];
@@ -49,7 +49,7 @@ namespace Isen.Dotnet.Library
                 index < 0)
                 throw new IndexOutOfRangeException();
             
-            var tmpArray = new string[Count - 1];
+            var tmpArray = new T[Count - 1];
             for(var i = 0 ; i < tmpArray.Length ; i++)
             {
                 tmpArray[i] =
@@ -59,7 +59,7 @@ namespace Isen.Dotnet.Library
         }
 
         // Renvoie l'index du 1er élément trouvé (ou -1)
-        public int IndexOf(string item)
+        public int IndexOf(T item)
         {
             var index = -1;
             for(var i = 0 ; i < Count ; i++)
@@ -73,19 +73,19 @@ namespace Isen.Dotnet.Library
             return index;
         }
 
-        public bool Remove(string item)
+        public bool Remove(T item)
         {
             var index  = IndexOf(item);
             if (index >= 0) RemoveAt(index);
             return index >= 0;
         }
 
-        public void Insert(int index, string item)
+        public void Insert(int index, T item)
         {
             if (index > Count || index < 0)
                 throw new IndexOutOfRangeException();
 
-            var tmpArray = new string[Count + 1];
+            var tmpArray = new T[Count + 1];
             for (var i = 0 ; i < tmpArray.Length ; i++)
             {
                 if (i < index) tmpArray[i] = this[i];
@@ -95,19 +95,26 @@ namespace Isen.Dotnet.Library
             _values = tmpArray;
         }
 
-        public void Clear() => _values = new string[0];
+        public void Clear() => _values = new T[0];
         
         public bool IsReadOnly => false;
 
-        public bool Contains(string item) => 
+        public bool Contains(T item) => 
             IndexOf(item) >= 0;
 
-        public void CopyTo(string[] array, int arrayIndex)
+        public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotSupportedException();
+            if (array == null) throw new ArgumentNullException();
+            if (arrayIndex < 0) throw new ArgumentOutOfRangeException();
+            if (Count + arrayIndex > array.Length) throw new ArgumentException();
+            
+            for(var i = 0; i < Count ; i++)
+            {
+                array[arrayIndex + i] = this[i];
+            }
         }
 
-        public IEnumerator<string> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             for (var i = 0 ; i < Count ; i++)
             {

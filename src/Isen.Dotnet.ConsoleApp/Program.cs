@@ -7,7 +7,7 @@ namespace Isen.Dotnet.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var myCollection = new MyCollection();
+            var myCollection = new MyCollection<string>();
             myCollection.Add("Hello");
             myCollection.Add("world");
             myCollection.Add("of");

@@ -147,3 +147,10 @@ Cette méthode vide la liste.
 
 ### Ajouter le support de l'énumération via l'interface `IList<string>`
 * Implémenter l'interface `IList<string>` et coder les méthodes manquantes requises.  
+
+## Généralisation de la classe MyCollection
+Toute la classe `MyCollection` a été codée comme une liste mutable de `string`.
+Cependant, rien, à part les références aux types `string`, n'oblige cette classe à se limiter à `string`.
+* Dans la déclation de la classe, remplacer `MyCollection` par `MyCollection<T>`, où sera un type générique, résolu lors de l'instanciation.
+* Dans les tests, remplacer les instiaciations `new MyCollection()` par `new MyCollection<string>()`.
+* Dans le code de la classe, remplacer tous les `string` qui conservent au type de la liste, par le type générique `T`.
