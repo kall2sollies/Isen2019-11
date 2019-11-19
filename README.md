@@ -79,3 +79,17 @@ Dans le projet Library, créer Hello.cs. :
 * Méthode Greet()
 
 Dans le projet console, instancier la classe Hello (il faut un using) et envoyer la sortie de la méthode Greet vers la console.  
+
+## Création d'une classe de Liste
+Dans Library, créer MyCollection.cs et ajouter les déclarations d'une classe C#. (on peut dupliquer Hello).
+
+Le but de cette classe est de créer et manipuler une liste de string (ajout, suppression, etc...).  
+On va utiliser un tableau natif (`string []`) comme structure de stockage interne de la liste.  
+
+### Base de la classe
+* Ajouter un tableau natif privé, pour le stockage de la liste.
+* Constructeurs :
+  * Initialisation du tableau
+  * Surcharge avec tableau en paramètre
+* Affichage : override de ToString, construction d'une chaine avec tous les éléments en utilisant `StringBuilder`
+* Tester cet état de la classe dans le projet console.

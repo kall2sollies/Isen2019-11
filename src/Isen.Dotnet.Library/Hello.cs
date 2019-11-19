@@ -26,11 +26,8 @@ namespace Isen.Dotnet.Library
             Name = name;
         }
 
-        public string Greet()
-        {
-            string greetMessage = 
-                "Hello, " + Name + "!";
-            return greetMessage;
-        }
-    }
+        // Syntaxe "Expression body"
+        public string Greet() => 
+            $"Hello, {Name}!";
+      }
 }
