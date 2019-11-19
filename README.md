@@ -18,7 +18,7 @@
 * Prendre sur internet un modèle de .gitignore
   adapté à c# / .net
 
-  ## Créer un remote et push le projet
+## Créer un remote et push le projet
 * Sur Github / GitLab (ou autre), créer un repo remote pour ce projet.  
 * Ajouter ce remote comme upstream du repo local :
 `git remote add origin https://github.com/kall2sollies/Isen2019-11`  
@@ -27,7 +27,7 @@
   `git commit -m "initial commit"`  
   `git push origin master`  
 
-  ## Créer un premier projet (console)
+## Créer un premier projet (console)
   * Dans le dossier de travail, créer un dossier `src/Isen.Dotnet.ConsoleApp`.
   * Naviguer dans ce dossier dans le terminal. 
   * Créer un projet console en utilisant la `CLI` dotnet  (Command Line Interface) avec la commande :
@@ -44,5 +44,27 @@
 * Le workspace / solution dispose d'un fichier de solution, qui recence tous les projets de la solution, ainsi que les fichiers annexes (type readme, gitignore...). Ce fichier est de type `.sln` et va être créé ainsi :
 
 Depuis le dossier racine (Isen.Dotnet)
-`dotnet new sln`  (Ceci crée simplement le fichier sln)
+`dotnet new sln`  (Ceci crée simplement le fichier sln)  
 `dotnet sln add src\Isen.Dotnet.ConsoleApp\` (Ceci ajoute le projet console au référentiel que constitue le sln).
+
+## Création du projet Library
+
+* Sous src/ créer un dossier `Isen.Dotnet.Library` et naviguer dedans avec le terminal.  
+* Lancer la commande `dotnet new classlib`  
+* Supprimer `Class1.cs`  
+* Revenir à la racine du projet, et référencer ce nouveau projet dans le sln :
+  `dotnet sln add src\Isen.Dotnet.Library\`  
+* Ajouter ce projet (library) comme référence du projet console. De cette manière, le projet console pourra utiliser des classes codées dans le projet Libray. Depuis le dossier src/Isen.Dotnet.ConsoleApp, lancer :
+  `dotnet add reference ..\Isen.Dotnet.Library\`  
+
+## Vérifications
+La hiérarchie est :
+* Isen.DotNet/ (sln)
+  * src/
+    * Isen.DotNet.ConsoleApp/ (csproj)
+    * Isen.DotNet.Library/ (csproj)
+  * README.md
+
+  Le fichier sln doit contenir des références aux 2 projets (ConsoleApp et Library).  
+
+  Le fichier src/Isen.DotNet.ConsoleApp/Isen.DotNet.ConsoleApp.csproj doit contenir une référence à Library.
