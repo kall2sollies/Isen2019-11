@@ -62,5 +62,49 @@ namespace Isen.Dotnet.UnitTests
             targetArray =  new string [] {"world", "of"}; 
             Assert.Equal(targetArray, myCollection.Values);
         }
+        [Fact]
+        public void RemoveTest()
+        {
+            // Créer des jeux de test avec mot en double
+            var testArray = new string[] {
+                 "Hello", "world", "of", "of", 
+                 "useless", "arrays" };
+            var myCollection = new MyCollection();
+            foreach (var item in testArray) myCollection.Add(item);
+
+            // Remove à la fin
+            { // bloc de scope
+                var removeRes = myCollection.Remove("arrays");
+                var expected = new string[] {
+                    "Hello", "world", "of", "of", 
+                    "useless" };
+                Assert.True(removeRes);
+                Assert.Equal(expected, myCollection.Values);
+            }
+            { // bloc de scope
+                var removeRes = myCollection.Remove("of");
+                var expected = new string[] {
+                    "Hello", "world", "of", 
+                    "useless" };
+                Assert.True(removeRes);
+                Assert.Equal(expected, myCollection.Values);
+            }
+            { // bloc de scope
+                var removeRes = myCollection.Remove("Hello");
+                var expected = new string[] {
+                    "world", "of", 
+                    "useless" };
+                Assert.True(removeRes);
+                Assert.Equal(expected, myCollection.Values);
+            }
+            { // bloc de scope
+                var removeRes = myCollection.Remove("fdsd");
+                var expected = new string[] {
+                    "world", "of", 
+                    "useless" };
+                Assert.False(removeRes);
+                Assert.Equal(expected, myCollection.Values);
+            }
+        }
     }
 }

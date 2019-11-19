@@ -132,3 +132,8 @@ Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent
 * Tester 'IndexOf()` au début, au milieu, à la fin
 * Tester l'accesseur indexeur `this[index]` au début, au milieu, à la fin.
 * Tester `RemoveAt()` en comparant les états successifs de la liste avec des arrays statiques qui representent les états attendus.
+
+### Méthode Remove(item)
+Cette méthode prend un item en paramètre, et retire cet élément de la liste si elle le trouve. S'il y en plusieurs, elle retire le premier. S'il n'y en a pas, elle ne fait rien.
+La méthode renvoie un bool selon qu'elle a retiré ou non l'élément.
+Coder ceci en TDD = Test Driven Development (Prototype, test, implémentation).

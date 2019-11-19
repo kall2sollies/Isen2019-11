@@ -72,6 +72,13 @@ namespace Isen.Dotnet.Library
             return index;
         }
 
+        public bool Remove(string item)
+        {
+            var index  = IndexOf(item);
+            if (index >= 0) RemoveAt(index);
+            return index >= 0;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
