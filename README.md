@@ -105,3 +105,8 @@ Coder cette méthode. La tester.
 ### Méthode IndexOf(item)
 Cette méthode renvoie l'index 0-based de l'élément passé en argument (ou le premier, si l'élément y est plusieurs fois).  
 Coder cette méthode. La tester.  
+
+### Accesseur / indexeur
+Coder l'accesseur qui va permettre d'accéder au valeur de la liste comme si c'était un tableau primitif :
+`myCollection[3]`  
+Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent `this[i]`.  

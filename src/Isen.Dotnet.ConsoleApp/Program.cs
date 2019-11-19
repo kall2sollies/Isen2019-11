@@ -21,6 +21,10 @@ namespace Isen.Dotnet.ConsoleApp
             Console.WriteLine($"Index of 'world' is {indexOfWorld}");
             // 1
 
+            var elementAt = myCollection[1];
+            Console.WriteLine(elementAt);
+            // world
+
             var indexOfFoo = myCollection.IndexOf("foo");
             Console.WriteLine($"Index of 'foo' is {indexOfFoo}");
             // -1

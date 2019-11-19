@@ -20,17 +20,26 @@ namespace Isen.Dotnet.Library
             _values = array;
         }
 
+        // syntaxe myCollection[2]
+        public string this[int index]
+        {
+            get => _values[index];
+            set => _values[index] = value;
+        }
+
+        // Ajoute l'élément en fin de liste
         public void Add(string item)
         {
             var tmpArray = new string[Count + 1];
             for (var i = 0 ; i < Count ; i++)
             {
-                tmpArray[i] = _values[i];
+                tmpArray[i] = this[i];
             }
             tmpArray[Count] = item;
             _values = tmpArray;
         }
 
+        // Retire l'élément à l'index donné
         public void RemoveAt(int index)
         {
             if (_values?.Length == null ||
@@ -42,17 +51,18 @@ namespace Isen.Dotnet.Library
             for(var i = 0 ; i < tmpArray.Length ; i++)
             {
                 tmpArray[i] =
-                    _values[i < index ? i : i + 1];
+                    this[i < index ? i : i + 1];
             }
             _values = tmpArray;
         }
 
+        // Renvoie l'index du 1er élément trouvé (ou -1)
         public int IndexOf(string item)
         {
             var index = -1;
             for(var i = 0 ; i < Count ; i++)
             {
-                if(_values[i].Equals(item))
+                if(this[i].Equals(item))
                 {
                     index = i;
                     break;
