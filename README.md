@@ -141,3 +141,9 @@ Coder ceci en TDD = Test Driven Development (Prototype, test, implémentation).
 ### Méthode Insert(index, item)
 Cette méthode insère l'item à l'index donné, et décale les éléments suivants.  
 Ex : `"A", "B", "D"` => `Insert(2, "C")` => `"A", "B", "C", "D"`.  
+
+### Méthode Clear()
+Cette méthode vide la liste.  
+
+### Ajouter le support de l'énumération via l'interface `IList<string>`
+* Implémenter l'interface `IList<string>` et coder les méthodes manquantes requises.  

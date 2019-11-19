@@ -1,20 +1,21 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Isen.Dotnet.Library
 {
-    public class MyCollection
+    public class MyCollection : IList<string>
     {
         // stockage interne de la liste
         private string[] _values;
         public string[] Values => _values;
         // Dimension de la liste
         public int Count => _values.Length;
- 
+
         public MyCollection()
         {
-            // Une new liste a 0 éléments
-            _values = new string[0];
+            Clear();
         }
         public MyCollection(string [] array)
         {
@@ -94,12 +95,35 @@ namespace Isen.Dotnet.Library
             _values = tmpArray;
         }
 
+        public void Clear() => _values = new string[0];
+        
+        public bool IsReadOnly => false;
+
+        public bool Contains(string item) => 
+            IndexOf(item) >= 0;
+
+        public void CopyTo(string[] array, int arrayIndex)
+        {
+            throw new NotSupportedException();
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            for (var i = 0 ; i < Count ; i++)
+            {
+                yield return this[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => 
+            GetEnumerator();
+
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append($"Dimension={Count} ");
             sb.Append("[ ");
-            foreach(var v in _values)
+            foreach(var v in this)
             {
                 sb.Append(v);
                 sb.Append(" ");

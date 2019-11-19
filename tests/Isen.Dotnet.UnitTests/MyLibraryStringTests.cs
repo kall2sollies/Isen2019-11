@@ -130,5 +130,28 @@ namespace Isen.Dotnet.UnitTests
                 "very", "useless", "arrays", "!" };
             Assert.Equal(expected, myCollection.Values);
         }
+
+        [Fact]
+        public void ClearTest()
+        {
+            var myCollection = BuildTestList();
+            myCollection.Clear();
+            Assert.Equal(0, myCollection.Count);
+        }
+
+        [Fact]
+        public void EnumerableTest()
+        {
+            var myCollection = BuildTestList();
+            var loops = 0;
+            var lastItem = "";
+            foreach(var item in myCollection)
+            {
+                lastItem = item;
+                loops++;
+            }
+            Assert.Equal(myCollection.Count, loops);
+            Assert.Equal("arrays", lastItem);
+        }
     }
 }
