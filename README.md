@@ -149,8 +149,15 @@ Cette méthode vide la liste.
 * Implémenter l'interface `IList<string>` et coder les méthodes manquantes requises.  
 
 ## Généralisation de la classe MyCollection
+
+### Conversion générique
 Toute la classe `MyCollection` a été codée comme une liste mutable de `string`.
 Cependant, rien, à part les références aux types `string`, n'oblige cette classe à se limiter à `string`.
 * Dans la déclation de la classe, remplacer `MyCollection` par `MyCollection<T>`, où sera un type générique, résolu lors de l'instanciation.
 * Dans les tests, remplacer les instiaciations `new MyCollection()` par `new MyCollection<string>()`.
 * Dans le code de la classe, remplacer tous les `string` qui conservent au type de la liste, par le type générique `T`.
+
+### Dupliquer les tests pour tester une liste d'entiers
+* Dupliquer la classe de test, sans ses méthodes, en l'appelant `MyCollectionIntTests`
+* Récupérer les listes de reférences et les convertir en liste d'int
+* Reprendre les méthodes de test les unes après les autres.
