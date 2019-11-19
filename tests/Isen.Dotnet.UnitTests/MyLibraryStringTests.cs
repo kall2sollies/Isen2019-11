@@ -106,5 +106,29 @@ namespace Isen.Dotnet.UnitTests
                 Assert.Equal(expected, myCollection.Values);
             }
         }
+
+        [Fact]
+        public void InsertTest()
+        {
+            var myCollection = BuildTestList();
+            // insert au milieu
+            myCollection.Insert(3, "very");
+            var expected = new string[] { 
+                "Hello", "world", "of", "very", 
+                "useless", "arrays" };
+            Assert.Equal(expected, myCollection.Values);
+            // Insert à la fin
+            myCollection.Insert(6, "!");
+            expected = new string[] { 
+                "Hello", "world", "of", 
+                "very", "useless", "arrays", "!" };
+            Assert.Equal(expected, myCollection.Values);
+            // Insert au début
+            myCollection.Insert(0, "");
+            expected = new string[] { 
+                "", "Hello", "world", "of", 
+                "very", "useless", "arrays", "!" };
+            Assert.Equal(expected, myCollection.Values);
+        }
     }
 }

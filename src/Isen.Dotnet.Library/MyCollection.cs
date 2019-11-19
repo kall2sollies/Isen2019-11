@@ -79,6 +79,21 @@ namespace Isen.Dotnet.Library
             return index >= 0;
         }
 
+        public void Insert(int index, string item)
+        {
+            if (index > Count || index < 0)
+                throw new IndexOutOfRangeException();
+
+            var tmpArray = new string[Count + 1];
+            for (var i = 0 ; i < tmpArray.Length ; i++)
+            {
+                if (i < index) tmpArray[i] = this[i];
+                else if (i == index) tmpArray[i] = item;
+                else tmpArray[i] = this[i - 1];
+            }
+            _values = tmpArray;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();

@@ -137,3 +137,7 @@ Réécrire dans les autres méthodes tous les appels `_values[i]` qui deviennent
 Cette méthode prend un item en paramètre, et retire cet élément de la liste si elle le trouve. S'il y en plusieurs, elle retire le premier. S'il n'y en a pas, elle ne fait rien.
 La méthode renvoie un bool selon qu'elle a retiré ou non l'élément.
 Coder ceci en TDD = Test Driven Development (Prototype, test, implémentation).
+
+### Méthode Insert(index, item)
+Cette méthode insère l'item à l'index donné, et décale les éléments suivants.  
+Ex : `"A", "B", "D"` => `Insert(2, "C")` => `"A", "B", "C", "D"`.  
