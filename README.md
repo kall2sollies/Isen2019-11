@@ -183,3 +183,14 @@ Cependant, rien, à part les références aux types `string`, n'oblige cette cla
   Afin de systématiser ces opérations, et de les rendre runtime-safe (vérification, compilation, maintenabilité), sont apparus les framework **ORM** (Object Relational Mapping). Les classes de modèle sont générées par un outil (ou au moins, le mapping avec la base de données est défini dans un fichier de configuration).
 
   Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il existe aussi NHibernate, issu de Hibernate (Java), et d'autres...
+
+  ## Ajout d'un projet ASP.NET Core MVC
+  * Créer le dossier du projet : `src/Isen.Dotnet.Web`
+  * En ligne de commande, naviguer vers ce dossier, et utiliser la CLI .Net avec la commande :   
+  `dotnet new mvc`
+  * Ajouter le projet de library comme référence à ce projet :  
+    `dotnet add reference ..\Isen.Dotnet.Library\`
+  * Ajouter ce projet à la solution (fichier .sln) :  
+    `dotnet sln add src\Isen.Dotnet.Web\`
+  * Commit
+
