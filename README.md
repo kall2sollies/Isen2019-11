@@ -284,3 +284,18 @@ services
   * L'instancier dans la méthode d'action du contrôleur
   * Passer son instance à la vue
   * Récupérer son instance dans la vue
+
+# Création d'un véritable modèle
+
+## Création d'une classe `Person`
+Dans le projet `Isen.Dotnet.Library`, ajouter un fichier `Model/Person.cs`.
+A cette classe, ajouter les champs `FirstName`, `LastName`, `DateOfBirth`, `BirthCity`, `ResidenceCity`, et un getter `Age`. Tous les types sont string, sauf la date de naissance. 
+Prévoir aussi un champ `Id`, de type int.
+Surcharger `ToString()` pour avoir une affichage console simple.
+
+## Création un service de données
+Le but est d'avoir une classe qui aura le rôle de générer des données aléatoires, et ce afin de disposer d'un jeu de données suffisant pour tester l'application dans des conditions réelles.
+
+Toujours dans le projet Library, créer dans un dossier `Services`, une classe `DataInitializer`.   
+
+Tester cette classe dans le projet console.  
