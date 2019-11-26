@@ -31,7 +31,9 @@ namespace Isen.Dotnet.Web
             IServiceCollection services)
         {
             Console.WriteLine("Startup.ConfigureServices");
-            services.AddControllersWithViews();
+            services
+                .AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. 

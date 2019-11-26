@@ -239,4 +239,48 @@ Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il ex
   ### Racine du projet
   * `Program.cs` : le point d'entrée d'exécution. En gros, le point d'entrée lance le serveur d'application web (Kestrel), qui écoute (par défaut) sur les ports HTTP 5000 et HTTPS 5001. Ce point d'entrée fait référence à la classe `Startup`.  
   * `Startup.cs` :
-    * 1 constructeur qui récupère des paramètres d'on ne sait où, et les stocke dans des variables membre
+    * 1 constructeur qui récupère des paramètres d'on ne sait où, et les stocke dans des variables membre.  
+    Ceci correspond au pattern d'**injection de dépendances** (**DI = Dependency Injection**) ou **IoC = Inversion of Concern**.  
+    On y reviendra plus tard, dans les contrôleurs.  
+    L'injection de dépendances est un design pattern courant, et implémenté ici en C#.  
+    * 1 méthode `ConfigureServices()` : ajout dans le code des différents services et librairies utilisés. Cette méthode est appelée automatiquement lors du runtime MVC.   
+    * 1 méthode `Configure()` : Configuration des options de ces mêmes services et librairies. Cette méthode est appelée automatiquement lors du runtime MVC.  
+    Le routing (contruction et schéma des URLs) est défini dans cette méthode et a la forme suivante : `/controller` (valeur par défaut = home) `/vue` (valeur par défaut = index).  
+
+## TD sur la découverte de ASP.Net MVC.
+
+### Ajout d'un contrôleur et d'une vue
+* Ajouter un contrôleur `Playground` 
+* Ajouter une vue `Index` à ce contrôleur, contenant le titre `Hello World` 
+  Cette vue devrait être accessible via l'url https://localhost:5001/playground/index 
+* Dans `_Layout`, identifier le menu et ajouter un lien vers cette nouvelle page.  
+
+### Logging
+Utiliser l'interface `ILogger<PlaygroundController>` afin de logguer les appels à la vue index.  
+
+Dans le fichier `appsettings.Development.json`, définir le niveau de Log de tout ce qui vient de Microsoft.* à Warning, et ce afin d'éviter que nos logs soient noyés dans le flux de ces autres logs.
+
+Les settings sont pris dans `appsettings.json`.  
+Si on est en mode `Development`, et que `appsettings.Development.json`, alors toute clé existante dans ce fichier va overrider le setting normal.  
+
+### Refresh des contenus cshtml sans recompilation
+Ajouter un package `NuGet` au projet (nom du package = `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`) avec la commande :
+`dotnet add package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`  
+Cette commande ajoute la référence au package dans le fichier .csproj, le télécharge depuis nuget.org et l'ajoute au dossier des package (dans le profil utilisateur de la machine). A exécuter depuis la racine du projet web.  
+
+Activer cette librairie dans `Startup` > `ConfigureServices` :
+````csharp
+services
+  .AddControllersWithViews()
+  .AddRazorRuntimeCompilation();
+```` 
+
+### Différentes façon de passer des données à une vue
+* Déclaration d'une variable locale dans le cshtml. Voir `/Playground/index`  
+* En C# : utilisation du ViewData dans le contrôleur. ViewData est un `Dictionnary<string, object>`. Ses clés sont des chaînes de caractère, et ses valeurs sont faiblement typées (object). Donc quand on les récupère, il peut être nécessaire de les caster afin de récupérer leur type.  
+* En C# : utilisation de ViewBag. ViewBag est un type `dynamic` c'est à dire que l'on peut créer des propriétés et affecter des valeurs à la volée.  
+* En C# : passage d'un objet à la vue :
+  * Définir une classe simple (MyDataClass)
+  * L'instancier dans la méthode d'action du contrôleur
+  * Passer son instance à la vue
+  * Récupérer son instance dans la vue

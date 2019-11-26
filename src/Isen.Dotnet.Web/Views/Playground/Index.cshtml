@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Playground Page";
+    var razorLocalVariable = "Je suis une variable déclarée dans un bloc Razor";
+    var razorList = new List<string> { "Hello", "world", "of", "Razor", "lists" };
+}
+@using Isen.Dotnet.Web.Controllers;
+@model MyDataClass;
+
+<div>
+    <h1>Hello World!</h1>
+    <p>Ceci est la vue index du contrôleur Playground</p>
+    <ul>
+        <!-- Variables locales Razor -->
+        <li>Variable razor : @razorLocalVariable</li>
+        <li>Liste razor :
+            <ul>
+                @foreach(var item in razorList)
+                {
+                    <li>@item</li>
+                }                
+            </ul>
+        </li>
+        <!-- Variables ViewData -->
+        <li>Variable ViewData : @ViewData["ViewDataVar"]</li>
+        <li>
+            Liste ViewData :
+            <ul>
+                @foreach(var item in (List<int>)ViewData["ViewDataList"])
+                {
+                    <li>@item</li>
+                }
+            </ul>
+        </li>
+        <!-- Variables ViewBag -->
+        <li>Variable ViewBag : @ViewBag.ViewBagVar</li>
+        <li>
+            Liste ViewBag :
+            <ul>
+                @foreach(var item in (List<DateTime>)ViewBag.ViewBagList)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+        </li>
+        <!-- Model -->
+        <li>Modèle : @Model.SomeField</li>
+        <li>Liste du modèle :
+            <ul>
+                @foreach(var item in Model.SomeList)
+                {
+                    <li>@item</li>
+                }                
+            </ul>
+        </li>
+    </ul>
+</div>
