@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Isen.Dotnet.Library.Model
 {
@@ -10,6 +11,8 @@ namespace Isen.Dotnet.Library.Model
         public DateTime? DateOfBirth {get;set;}
         public string BirthCity {get;set;}
         public string ResidenceCity {get;set;}
+        
+        [NotMapped] // ne pas générer ce champ dans la bdd
         public int? Age => DateOfBirth.HasValue ?
             // Nb de jours entre naissance et today / 365
             (int)((DateTime.Now - DateOfBirth.Value).TotalDays / 365) :

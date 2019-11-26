@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}\\src/Isen.Dotnet.Web/IsenWeb.db",
+            "dialect": "SQLite",
+            "name": "IsenWeb"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

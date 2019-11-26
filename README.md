@@ -340,3 +340,65 @@ services.AddTransient<IDataInitializer, DataInitializer>();
 services.AddSingleton<IDataInitializer, DataInitializer>();
 ````
 * De la même, injecter via le constructeur un `ILogger`.  
+
+# Ajout d'une base de données
+Le but est d'avoir un système de persistence des données, afin de stocker, pour l'instant, les personnes générées, et pouvoir les modifier au travers du formulaire d'édition que nous allons créer.
+
+Le 'serveur' de base de données que nous allons utiliser est `SQLite`, et c'est une base de données relationnelle.  
+SQLite n'est pas vraiment un serveur, mais juste un fichier, avec des librairies driver pour l'utiliser. Donc simple à mettre en oeuvre. Mais performances moyennes, et mono-user.
+
+Tout ce que nous allons voir avec SQLite, et l'ORM Entity Framework, reste identique pour SQL Server, PostGre, MySQL, etc...
+
+## Ajout des packages requis.
+Entity Framework Core 3.0.1 nécessite que le projet auquel on l'ajoute soit `netstandard2.1`. Editer le `.csproj` du projet Library, et faire la modif.
+
+Depuis le projet Library, ajouter les packages suivants :
+`dotnet add package Microsoft.EntityFrameworkCore.Sqlite`  
+`dotnet add package Microsoft.EntityFrameworkCore.Design` 
+
+Revenir au projet web et tester si en l'état tout marche.
+
+## Chaine de connexion
+Ajouter au fichier `appsettings.json` la chaîne de connexion suivante, au format JSON :
+````json
+"ConnectionStrings": {
+  "DefaultConnection": "DataSource=.\\IsenWeb.db"
+}
+````
+## Ajout d'une classe de contexte 
+Le fonctionnement d'Entity Framework est lié à la présence d'une classe de contexte de base données, donc le rôle :
+* Définir les objets présents dans le contexte,
+* Définir leurs liens avec la base de données
+* Préciser, si nécessaire, les relations entre les objets (beaucoup sont implicites par convention).  
+
+Dans le projet Library, créer un dossier Context, et une classe `ApplicationDbContext`.  
+
+Faire hériter cette classe de `DbContext` (`using Microsoft.EntityFrameworkCore`).  
+
+Ajouter en champ de cette classe une propriété de type `DbSet<Person>`. C'est au travers de cette propriété qu'on pourra accéder aux records de type Person dans la base de données.
+
+Générer le constructeur de cette classe, basé sur la surcharge avec options.  
+
+Implémenter l'override de `OnModelCreating(ModelBuilder)` et définir les tables et relations.  
+
+Dans la classe `Person`, le champ `Age` ne doit pas donner lieu à la création d'un champ correspondant dans la base de données. Pour indiquer cela, ajouter un attribut `[NotMapped]` au dessus du champ `Age`.  
+
+Dans `Startup` / `ConfigureService()`, ajouter le service lié à ce contexte.  
+
+## Création d'un jeu de données au démarrage
+On va utiliser `IDataInitializer` pour réaliser les opérations suivantes au démarrage de l'application :
+* Supprimer (si nécessaire) puis recréer la base de données.  
+* Remplir la table `Person` avec des personnes aléatoires.
+
+Ajouter les méthodes `DropDatabase()`, `CreateDatabase()` et `AddPersons()` à l'interface, et les implémenter dans la classe.  
+Pour accéder à la base de données depuis la classe `DataInitializer`, utiliser le pattern d'injections de dépendances pour disposer d'une instance de `ApplicationDbContext` dans cette classe.  
+
+Dans (Web) Program.cs, résoudre une instance de `IDataInitializer`, et appeler successivement ces 3 méthodes.  
+
+## Utiliser les données issues de la base de données dans le contrôleur
+
+Via le pattern d'injection de dépendance, fournir à `PersonController` une instance de `ApplicationDbContext`.  
+
+Remplacer alors le code de l'action Index afin qu'elle prenne ses données dans l'instance du contexte.  
+
+Retirer l'injection de DataInitializer, qui est devenue obsolète.  

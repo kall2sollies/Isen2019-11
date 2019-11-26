@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Isen.Dotnet.Library.Context;
 using Isen.Dotnet.Library.Model;
+using Microsoft.Extensions.Logging;
 
 namespace Isen.Dotnet.Library.Services
 {
@@ -42,6 +45,17 @@ namespace Isen.Dotnet.Library.Services
         // Générateur aléatoire
         private readonly Random _random;
 
+        // DI de ApplicationDbContext
+        private readonly ApplicationDbContext _context;
+        private readonly ILogger<DataInitializer> _logger;
+        public DataInitializer(
+            ILogger<DataInitializer> logger,
+            ApplicationDbContext context)
+        {
+            _context = context;
+            _logger = logger;
+        }
+
         // Générateur de prénom
         private string RandomFirstName => 
             _firstNames[_random.Next(_firstNames.Count)];
@@ -73,6 +87,32 @@ namespace Isen.Dotnet.Library.Services
                 persons.Add(RandomPerson);
             }
             return persons;
+        }
+
+        public void DropDatabase()
+        {
+            _logger.LogWarning("Dropping database");
+            _context.Database.EnsureDeleted();
+        }
+            
+
+        public void CreateDatabase()
+        {
+            _logger.LogWarning("Creating database");
+            _context.Database.EnsureCreated();
+        }
+
+        public void AddPersons()
+        {
+            _logger.LogWarning("Adding persons");
+            // S'il y a déjà des personnes dans la base -> ne rien faire
+            if (_context.PersonCollection.Any()) return;
+            // Générer des personnes
+            var persons = GetPersons(50);
+            // Les ajouter au contexte
+            _context.AddRange(persons);
+            // Sauvegarder le contexte
+            _context.SaveChanges();
         }
 
         // Ctor

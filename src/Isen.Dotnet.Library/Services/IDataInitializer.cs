@@ -6,5 +6,8 @@ namespace Isen.Dotnet.Library.Services
     public interface IDataInitializer
     {
          List<Person> GetPersons(int size);
+         void DropDatabase();
+         void CreateDatabase();
+         void AddPersons();
     }
 }

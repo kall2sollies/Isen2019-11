@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Isen.Dotnet.Library.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -16,11 +18,20 @@ namespace Isen.Dotnet.Web
         {
             Console.WriteLine("Program.Main.Start");
             // Définir un 'hote'
-            CreateHostBuilder(args)
+             var host = CreateHostBuilder(args)
             // le 'construire'
-                .Build()
+                .Build();
+            // Récupérer une instance de IDataInitializer
+            using(var serviceScope = host.Services.CreateScope())
+            {
+                var dataInitializer = serviceScope
+                    .ServiceProvider.GetService<IDataInitializer>();
+                dataInitializer.DropDatabase();
+                dataInitializer.CreateDatabase();
+                dataInitializer.AddPersons();
+            }
             // l'exécuter
-                .Run(); // Loop d'exécution et d'écoute du serveur web
+            host.Run(); // Loop d'exécution et d'écoute du serveur web
             
             // Ceci ne s'exécute que quand le serveur web
             // est arrêté
