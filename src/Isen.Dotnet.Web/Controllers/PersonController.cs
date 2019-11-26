@@ -1,3 +1,4 @@
+using Isen.Dotnet.Library.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Isen.Dotnet.Web.Controllers
@@ -8,7 +9,9 @@ namespace Isen.Dotnet.Web.Controllers
         [HttpGet] // facultatif car GET par défaut
         public IActionResult Index()
         {
-            return View();
+            var dataInitializer = new DataInitializer();
+            var persons = dataInitializer.GetPersons(20);
+            return View(persons);
         }
     }
 }

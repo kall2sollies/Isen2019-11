@@ -301,6 +301,8 @@ Toujours dans le projet Library, créer dans un dossier `Services`, une classe `
 Tester cette classe dans le projet console.  
 
 ## Création de la stack (M)VC pour Person
+
+### Maquette du tableau de la vue Index
 * Créer un `PersonController`
 * Créer une vue `Index` de test.
 * Créer un menu hiérachique (dropdown) avec les entrées 
@@ -308,3 +310,10 @@ Tester cette classe dans le projet console.
     * Toutes (vue index)
     * Nouvelle... (vue detail, qui n'existe pas encore)
 * Dans la vue Index, prévoir un tableau qui affichera toutes les personnes.
+
+Pour le menu hiérarchique, nous utilisons le framework CSS `Bootstrap`. Voir https://getbootstrap.com/docs/4.1/getting-started/introduction/ pour le détail des classes, attributs, etc...
+
+### Injection du modèle (Person) dans sa vue Index
+* Instancier une liste aléatoire de personnes
+* Passer cette liste à la vue
+* Modifier la vue afin qu'elle boucle sur la liste et affiche les champs dans le tableau
