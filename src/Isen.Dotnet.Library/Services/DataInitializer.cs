@@ -4,7 +4,7 @@ using Isen.Dotnet.Library.Model;
 
 namespace Isen.Dotnet.Library.Services
 {
-    public class DataInitializer
+    public class DataInitializer : IDataInitializer
     {
         private List<string> _firstNames => new List<string>
         {

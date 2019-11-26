@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Isen.Dotnet.Library.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,9 +32,15 @@ namespace Isen.Dotnet.Web
             IServiceCollection services)
         {
             Console.WriteLine("Startup.ConfigureServices");
+            // Pipeline des services injectés
             services
+            // Injection de ASP.NET MVC
                 .AddControllersWithViews()
+            // Injection de la compilation à la volée des vues Razor
                 .AddRazorRuntimeCompilation();
+
+            // Injection de mes services
+            services.AddScoped<IDataInitializer, DataInitializer>();
         }
 
         // This method gets called by the runtime. 

@@ -5,12 +5,19 @@ namespace Isen.Dotnet.Web.Controllers
 {
     public class PersonController : Controller
     {
+        private readonly IDataInitializer _dataInitializer;
+
+        public PersonController(
+            IDataInitializer dataInitializer)
+        {
+            _dataInitializer = dataInitializer;
+        }
+
         // https://localhost:5001/Person/Index
         [HttpGet] // facultatif car GET par défaut
         public IActionResult Index()
-        {
-            var dataInitializer = new DataInitializer();
-            var persons = dataInitializer.GetPersons(20);
+        {            
+            var persons = _dataInitializer.GetPersons(20);
             return View(persons);
         }
     }

@@ -317,3 +317,24 @@ Pour le menu hiérarchique, nous utilisons le framework CSS `Bootstrap`. Voir ht
 * Instancier une liste aléatoire de personnes
 * Passer cette liste à la vue
 * Modifier la vue afin qu'elle boucle sur la liste et affiche les champs dans le tableau
+
+### Illustrer l'utilisation de la librairie d'injection de dépendances.
+
+* Extraire une interface `IDataInitializer` de la classe `DataInitializer`. Ne mettre que la méthode publique.
+* Dans le contrôleur, faire un membre de cette interface, l'instancier dans l'action, et l'utiliser.
+* Instancier `DataInitializer` depuis le constructeur du contrôleur.
+* Afin de respecter le design-pattern de l'inversion de contrôle (**`IoC`**), propre aux mécanismes d'injection de dépendance (**`DI`**), le constructeur ne doit pas instancier lui-même le service, mais au contraire, indiquer qu'il a besoin de ce service pour fonctionner. Le service `IDataInitializer` doit donc devenir un paramètre du constructeur.
+* Les mappings entre interfaces et classes, utilisées par la librairie d'injection de dépendances, se configurent dans `Startup`, dans `ConfigureServices()`, avec la ligne :
+````csharp
+// Quand on demande un IDataInitializer, fournir 
+// une instance de DataInitializer
+services.AddScoped<IDataInitializer, DataInitializer>();
+
+// AddScoped : conserver la même instance pendant toute
+// la requête HTTP
+services.AddScoped<IDataInitializer, DataInitializer>();
+// Nouvelle instance à chaque demande
+services.AddTransient<IDataInitializer, DataInitializer>();
+// Même instance pendant tout le lifecycle de l'application
+services.AddSingleton<IDataInitializer, DataInitializer>();
+````
