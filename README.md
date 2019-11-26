@@ -161,3 +161,25 @@ Cependant, rien, à part les références aux types `string`, n'oblige cette cla
 * Dupliquer la classe de test, sans ses méthodes, en l'appelant `MyCollectionIntTests`
 * Récupérer les listes de reférences et les convertir en liste d'int
 * Reprendre les méthodes de test les unes après les autres.
+
+# Création d'un projet ASP.Net Core MVC
+
+## Terminologie
+* **ASP** = Active Server Page. Equivalent Microsoft de PHP, antérieur aux années 2000. HTML + templating / code en Visual Basic. 
+* **.Net** : Framework et machine virtuelle (runtime) utilisant C# (ou VB.Net) comme langage de programmation, et un ensemble d'API (librairies) qui constituent le framework .Net. Version actuelle : Framework .Net 4.7 (dit classic)
+* **.Net Core** : reboot Open Source et multiplate-forme du Framework .Net, basé sur Mono. Version actuelle : .Net Core 3.0
+* **C#** : langage de programmation objet, statique, fortement typé, similaire à Java, et utilisant les API de .Net. Version actuelle : 8.0. Le compilateur .Net Core (multiplateforme) s'appelle *Roslyn*.
+* **MVC** (Model View Controller) : transposition du design-pattern MVC dans un environnement Web.
+  * *Model* : asbtraction de l'accès aux données, sur base SQL Server, MySQL, SQLite, etc...
+  * *View* : fichiers .cshtml (comme html + C#). Il s'agit de fichiers de syntaxe html, et utilisant le moteur Razor (C#) comme langage de templating.
+  * *Controller* : classes C# ayant une convention de nommage pour donner leurs noms aux vues et contrôleurs, et intégrant les données issues du modèle soit directement, soit au travers de design-patterns type 'Repository'.
+
+  ## Accès aux données
+  Problématique en web :
+  * Accès aux données d'une base
+  * Systématiser les opérations courantes (CRUD = Create Read Update Delete)
+  * Lier un modèle objet (code) avec un schéma (schéma de base de données)
+
+  Afin de systématiser ces opérations, et de les rendre runtime-safe (vérification, compilation, maintenabilité), sont apparus les framework **ORM** (Object Relational Mapping). Les classes de modèle sont générées par un outil (ou au moins, le mapping avec la base de données est défini dans un fichier de configuration).
+
+  Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il existe aussi NHibernate, issu de Hibernate (Java), et d'autres...
