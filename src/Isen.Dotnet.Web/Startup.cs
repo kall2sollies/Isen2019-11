@@ -13,22 +13,34 @@ namespace Isen.Dotnet.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        // Constructeur
+        public Startup(
+            // d'où vient ce param ??
+            IConfiguration configuration)
         {
+            Console.WriteLine("Startup.Ctor");
+            // le param est stocké dans une variable membre
             Configuration = configuration;
         }
-
+        // la variable membre
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        // This method gets called by the runtime. 
+        // Use this method to add services to the container.
+        public void ConfigureServices(
+            IServiceCollection services)
         {
+            Console.WriteLine("Startup.ConfigureServices");
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // This method gets called by the runtime. 
+        // Use this method to configure the HTTP request pipeline.
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env)
         {
+            Console.WriteLine("Startup.Configure");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

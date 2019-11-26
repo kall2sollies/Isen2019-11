@@ -11,15 +11,27 @@ namespace Isen.Dotnet.Web
 {
     public class Program
     {
+        // Lancer le serveur d'application Kestrel
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            Console.WriteLine("Program.Main.Start");
+            // Définir un 'hote'
+            CreateHostBuilder(args)
+            // le 'construire'
+                .Build()
+            // l'exécuter
+                .Run(); // Loop d'exécution et d'écoute du serveur web
+            
+            // Ceci ne s'exécute que quand le serveur web
+            // est arrêté
+            Console.WriteLine("Program.Main.End");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // Référence à une classe 'Startup'
                     webBuilder.UseStartup<Startup>();
                 });
     }

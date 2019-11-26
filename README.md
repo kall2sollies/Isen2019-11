@@ -235,3 +235,8 @@ Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il ex
   Une classe de contrôleur contient des méthodes correspondant à chaque vue/action (exemple : `Index()`, `Privacy()`).  
 
   Dans le cas où l'action correspond simplement à renvoyer le HTML de la vue, ces méthodes renvoient simplement `return View()`.  
+
+  ### Racine du projet
+  * `Program.cs` : le point d'entrée d'exécution. En gros, le point d'entrée lance le serveur d'application web (Kestrel), qui écoute (par défaut) sur les ports HTTP 5000 et HTTPS 5001. Ce point d'entrée fait référence à la classe `Startup`.  
+  * `Startup.cs` :
+    * 1 constructeur qui récupère des paramètres d'on ne sait où, et les stocke dans des variables membre
