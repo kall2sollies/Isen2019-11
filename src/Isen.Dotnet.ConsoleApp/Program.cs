@@ -8,9 +8,7 @@ namespace Isen.Dotnet.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var dataInitializer = new DataInitializer();
-            var persons = dataInitializer.GetPersons(10);
-            foreach(var p in persons) Console.WriteLine(p);
+
         }
     }
 }

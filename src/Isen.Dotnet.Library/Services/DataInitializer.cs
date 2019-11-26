@@ -54,6 +54,7 @@ namespace Isen.Dotnet.Library.Services
         {
             _context = context;
             _logger = logger;
+            _random = new Random();
         }
 
         // Générateur de prénom
@@ -113,12 +114,6 @@ namespace Isen.Dotnet.Library.Services
             _context.AddRange(persons);
             // Sauvegarder le contexte
             _context.SaveChanges();
-        }
-
-        // Ctor
-        public DataInitializer()
-        {
-            _random = new Random();
         }
     }
 }
