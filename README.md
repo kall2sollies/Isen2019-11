@@ -325,6 +325,7 @@ Pour le menu hiérarchique, nous utilisons le framework CSS `Bootstrap`. Voir ht
 * Instancier `DataInitializer` depuis le constructeur du contrôleur.
 * Afin de respecter le design-pattern de l'inversion de contrôle (**`IoC`**), propre aux mécanismes d'injection de dépendance (**`DI`**), le constructeur ne doit pas instancier lui-même le service, mais au contraire, indiquer qu'il a besoin de ce service pour fonctionner. Le service `IDataInitializer` doit donc devenir un paramètre du constructeur.
 * Les mappings entre interfaces et classes, utilisées par la librairie d'injection de dépendances, se configurent dans `Startup`, dans `ConfigureServices()`, avec la ligne :
+
 ````csharp
 // Quand on demande un IDataInitializer, fournir 
 // une instance de DataInitializer
@@ -338,3 +339,4 @@ services.AddTransient<IDataInitializer, DataInitializer>();
 // Même instance pendant tout le lifecycle de l'application
 services.AddSingleton<IDataInitializer, DataInitializer>();
 ````
+* De la même, injecter via le constructeur un `ILogger`.  
