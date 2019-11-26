@@ -293,9 +293,18 @@ A cette classe, ajouter les champs `FirstName`, `LastName`, `DateOfBirth`, `Birt
 Prévoir aussi un champ `Id`, de type int.
 Surcharger `ToString()` pour avoir une affichage console simple.
 
-## Création un service de données
+## Création d'un service de données
 Le but est d'avoir une classe qui aura le rôle de générer des données aléatoires, et ce afin de disposer d'un jeu de données suffisant pour tester l'application dans des conditions réelles.
 
 Toujours dans le projet Library, créer dans un dossier `Services`, une classe `DataInitializer`.   
 
 Tester cette classe dans le projet console.  
+
+## Création de la stack (M)VC pour Person
+* Créer un `PersonController`
+* Créer une vue `Index` de test.
+* Créer un menu hiérachique (dropdown) avec les entrées 
+  * Personnes... (non cliquable)
+    * Toutes (vue index)
+    * Nouvelle... (vue detail, qui n'existe pas encore)
+* Dans la vue Index, prévoir un tableau qui affichera toutes les personnes.
