@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    <!-- Header : logo et menu -->
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -29,20 +30,28 @@
             </div>
         </nav>
     </header>
+
+    <!-- Zone de contenu -->
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- Razor : insère la vue ici (ex : Index.cshtml) -->
             @RenderBody()
         </main>
     </div>
 
+    <!-- Footer : copyright, mentions légales et autres conneries -->
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2019 - Isen.Dotnet.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    
+    <!-- Insertion des librairies et scripts JS au dernier moment -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- ??? -->
     @RenderSection("Scripts", required: false)
 </body>
 </html>

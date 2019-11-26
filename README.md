@@ -174,23 +174,64 @@ Cependant, rien, à part les références aux types `string`, n'oblige cette cla
   * *View* : fichiers .cshtml (comme html + C#). Il s'agit de fichiers de syntaxe html, et utilisant le moteur Razor (C#) comme langage de templating.
   * *Controller* : classes C# ayant une convention de nommage pour donner leurs noms aux vues et contrôleurs, et intégrant les données issues du modèle soit directement, soit au travers de design-patterns type 'Repository'.
 
-  ## Accès aux données
-  Problématique en web :
-  * Accès aux données d'une base
-  * Systématiser les opérations courantes (CRUD = Create Read Update Delete)
-  * Lier un modèle objet (code) avec un schéma (schéma de base de données)
+## Accès aux données
+Problématique en web :
+* Accès aux données d'une base
+* Systématiser les opérations courantes (CRUD = Create Read Update Delete)
+* Lier un modèle objet (code) avec un schéma (schéma de base de données)
 
-  Afin de systématiser ces opérations, et de les rendre runtime-safe (vérification, compilation, maintenabilité), sont apparus les framework **ORM** (Object Relational Mapping). Les classes de modèle sont générées par un outil (ou au moins, le mapping avec la base de données est défini dans un fichier de configuration).
+Afin de systématiser ces opérations, et de les rendre runtime-safe (vérification, compilation, maintenabilité), sont apparus les framework **ORM** (Object Relational Mapping). Les classes de modèle sont générées par un outil (ou au moins, le mapping avec la base de données est défini dans un fichier de configuration).
 
-  Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il existe aussi NHibernate, issu de Hibernate (Java), et d'autres...
+Le framework ORM le + utilisé en ASP.Net est **Entity Framework (Core)**. Il existe aussi NHibernate, issu de Hibernate (Java), et d'autres...
 
-  ## Ajout d'un projet ASP.NET Core MVC
-  * Créer le dossier du projet : `src/Isen.Dotnet.Web`
-  * En ligne de commande, naviguer vers ce dossier, et utiliser la CLI .Net avec la commande :   
-  `dotnet new mvc`
-  * Ajouter le projet de library comme référence à ce projet :  
-    `dotnet add reference ..\Isen.Dotnet.Library\`
-  * Ajouter ce projet à la solution (fichier .sln) :  
-    `dotnet sln add src\Isen.Dotnet.Web\`
-  * Commit
+## Ajout d'un projet ASP.NET Core MVC
+* Créer le dossier du projet : `src/Isen.Dotnet.Web`
+* En ligne de commande, naviguer vers ce dossier, et utiliser la CLI .Net avec la commande :   
+`dotnet new mvc`
+* Ajouter le projet de library comme référence à ce projet :  
+ `dotnet add reference ..\Isen.Dotnet.Library\`
+* Ajouter ce projet à la solution (fichier .sln) :  
+  `dotnet sln add src\Isen.Dotnet.Web\`
+* Commit
+* Tester l'exécution : naviguer vers le dossier `src\Isen.Dotnet.Web\`, puis :
+  `dotnet run` puis https://localhost:5001 ou http://localhost:5000
 
+## Anatomie des fichiers générés
+
+### Fichiers et dossiers Web
+
+* Dossier `wwwroot/` :
+  * contient les 'assets' web, à savoir les fichiers `javascript`, `css`, images, font... Bref, toutes les ressources web.  
+  * Les librairies web externes (type Bootsrap, JQuery, Angular, Vue JS, React...) se trouveront aussi dans ce dossier.
+  * Il est tout à fait possible de combiner la CLI `dotnet` avec une autre CLI de gestion de projet web, telle que `npm`, la CLI Angular, etc...
+  * De même, il est tout à fait possible de produire le javascript par compilation de code `TypeScript`, et d'intégrer les procédures de compilation TS au build du projet.
+  * Tout pareil pour `CSS` avec `SASS` (ou `LESS`), leurs compilateurs peuvent être intégrés au build du projet.
+* Dossier `Views/`
+  * Chaque sous-dossier (à part Shared) correspond à UN contrôleur. Home est donc un `controller`.  
+  * Dans le dossier d'un contrôleur, chaque fichier .cshtml correspond à une `action`. On peut dire qu'une action est une **vue**, avec une url particulière. 
+  Les fichiers cshtml contiennent principalement du HTML (et quelques directives de templating en syntaxe Razor). Exemple d'insertion d'une variable C# / Razor dans le code HTML :
+````
+@{
+    var welcomeMessage = $"Bienvenue, il est {DateTime.Now.ToShortTimeString()}";
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>@welcomeMessage</p>
+</div>
+````
+  * Le schéma des url, à ce stade, semble être `/Controller/Action` `/Controller/Vue`
+  * Les fichiers de vue `Index.cshtml` et `Privacy.cshtml` contiennent le contenu des pages correspondantes, mais PAS le header (menu) ni le footer.
+  * Le dossier `Shared/` est un dossier réservé, et contient notamment le fichier `_Layout.cshtml`. Ce fichier est le template commun à toutes les pages/vues.  
+  * Le fichier `_ViewStart.cshtml` contient des directives Razor qui sont ajoutées à toutes les vues. Dans ce fichier, la propriété `Layout` est définie avec la valeur `"_Layout"`. Le lien entre les vues et le template est donc fait ainsi.  
+  * Le fichier `_ViewImports.cshtml` centralise tous les `@using` commun à toutes les vues. Ces `@using` sont l'équivalent Razor des `using` du C#, et de la même façon, permettent d'importer des namespace avec d'utiliser les classes correspondantes dans le code Razor.  
+
+  ## Fichiers et dossiers de code c#
+
+  ### Dossier Controllers
+  A chaque  contrôleur correspond une classe C#.
+  La convention de nommage impose que si le contrôleur s'appelle, `Foo`, sa classe s'appellera `FooController`.  
+
+  Une classe de contrôleur contient des méthodes correspondant à chaque vue/action (exemple : `Index()`, `Privacy()`).  
+
+  Dans le cas où l'action correspond simplement à renvoyer le HTML de la vue, ces méthodes renvoient simplement `return View()`.  
