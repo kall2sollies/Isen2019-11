@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Isen.Dotnet.Library.Context;
 using Isen.Dotnet.Library.Model;
@@ -75,5 +76,10 @@ namespace Isen.Dotnet.Web.Controllers
             // Renvoyer vers la liste
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Route("api/[controller]/")]
+        public virtual IEnumerable<T> GetData() => 
+            BaseQuery().ToList();
     }
 }

@@ -531,3 +531,18 @@ Répéter les mêmes étapes d'adaptation pour la ville de résidence.
 ## Formulaire d'édition du personne.
 
 Remplacer la zone de texte correspondant à la ville, par une liste déroulante.
+
+# Création d'une API
+
+## Méthode générique de renvoi des données en JSON
+Nous allons créer des méthodes de controller permettant de lister les différentes entités au format JSON.  
+
+Dans `BaseController`, créer une méthode `GetData()`, qui renvoie la liste des entités du controller.
+
+Lors de l'appel des url ainsi exposées (https://localhost:5001/api/Person ou https://localhost:5001/api/City), les données sont renvoyées en JSON.
+
+## Exploitation de ces données en JavaScript via AJAX
+* Créer une vue/action correspondant à `/Home/Ajax`. Tester cette vue avec https://localhost:5001/Home/Ajax
+* Ajouter cette vue au menu
+* Dans cette vue, ajouter un bloc div avec l'id result.
+* Ouvrir le fichier `/wwwroot/js/site.js` et coder un appel Ajax à l'API /api/city, et afficher le résultat sous forme d'une liste.
