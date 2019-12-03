@@ -34,7 +34,9 @@
                         asp-action="Edit"
                         asp-route-id="@person.Id">Modifier</a>
                     <a class="btn btn-outline-danger"
-                     href="#">Supprimer</a>
+                        asp-controller="Person"
+                        asp-action="Delete"
+                        asp-route-id="@person.Id">Supprimer</a>
                 </td>
             </tr>
             }

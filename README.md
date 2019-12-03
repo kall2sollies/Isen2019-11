@@ -433,3 +433,8 @@ posté, en POST.
 * Implémenter la sauvegarde :
   * Mise à jour si Id > 0
   * Création si Id = 0
+
+#### Supprimer une personne
+* Dans la liste de `Index.cshtml`, ajouter au bouton de suppression l'envoi vers
+l'action `Delete`, et le passage de l'id de la personne à supprimer en param.
+* Dans le contrôleur, implémenter l'action `Delete(id)`. 

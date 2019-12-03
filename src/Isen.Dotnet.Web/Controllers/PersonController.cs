@@ -58,5 +58,19 @@ namespace Isen.Dotnet.Web.Controllers
             // Renvoyer à la liste
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            // Trouver la personne à supprimer
+            var person = _context.PersonCollection
+                .FirstOrDefault(p => p.Id == id);
+            // Supprimer la personne
+            if (person != null) _context.PersonCollection.Remove(person);
+            // Sauvegarder
+            _context.SaveChanges();
+            // Renvoyer vers la liste
+            return RedirectToAction("Index");
+        }
     }
 }
