@@ -15,6 +15,16 @@ namespace Isen.Dotnet.Web.Controllers
             ApplicationDbContext context) : base(logger, context)
         {
             Logger.LogDebug("PersonController/constructeur");
-        }                
+        }               
+
+         public override IActionResult Delete(int id)
+         {
+             // override du comportement par défaut : ne jamais autoriser
+             // la suppression de la personne ayant l'id=10
+             if (id == 10) return RedirectToAction("Index");
+             // En dehors de ce cas, effectuer l'implémentation normale
+             // de cette méthode
+             return base.Delete(id);
+         } 
     }
 }

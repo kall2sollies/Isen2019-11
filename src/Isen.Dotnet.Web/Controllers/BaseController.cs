@@ -60,7 +60,7 @@ namespace Isen.Dotnet.Web.Controllers
 
         // https://localhost:5001/[Controller]/Delete/42
         [HttpGet]
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(int id)
         {
             // Trouver la personne à supprimer
             var entity = Context.Set<T>()
