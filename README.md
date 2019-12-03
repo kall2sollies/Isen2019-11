@@ -495,7 +495,15 @@ Nous allons répercuter cette nouvelle classe de modèle dans toutes les couches
 * Dans le projet Web, `Program.cs`, appeler `AddCities()`
 * Toujours dans le projet web, Créer `CityController` sur le modèle de `PersonController`.  
 
-# Vues en CSHTML
+### Vues en CSHTML
 * Dans `_Layout.cshtml`, modifier le menu en dupliquant la section Personnes et en l'adaptant pour les Villes.
 * Dans le dossier des `Views`, créer le dossier `City`, puis dupliquer `Person/Index.cshtml` à l'intérieur, et adapter. 
 * Dupliquer aussi `Edit.cshtml` et adapter le formulaire en conséquence.
+
+# Ajout de relations
+
+## Factoriser les requêtes de liste et de détails
+Dans la classe `BaseController`, créer une méthode `BaseQuery` protected et virtual,permettant d'isoler la génération de la liste des entités.  
+
+Utiliser cette méthode dans `Index`, et `Edit(id)`.  
+

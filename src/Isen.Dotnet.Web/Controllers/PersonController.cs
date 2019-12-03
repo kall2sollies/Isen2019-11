@@ -17,6 +17,13 @@ namespace Isen.Dotnet.Web.Controllers
             Logger.LogDebug("PersonController/constructeur");
         }               
 
+        // Exemple d'override de la query : liste les personnes
+        // par ordre alpha de leur ville de naissance
+        protected override IQueryable<Person> BaseQuery() =>
+            base.BaseQuery()
+                //.Where(p => p.BirthCity.StartsWith("Toul"))
+                .OrderBy(p => p.BirthCity);        
+
          public override IActionResult Delete(int id)
          {
              // override du comportement par défaut : ne jamais autoriser

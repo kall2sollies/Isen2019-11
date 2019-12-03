@@ -21,11 +21,14 @@ namespace Isen.Dotnet.Web.Controllers
             Logger.LogDebug("BaseController<T>/constructeur");
         }
 
+        protected virtual IQueryable<T> BaseQuery() => 
+            Context.Set<T>().AsQueryable();
+ 
         // https://localhost:5001/[Controller]/Index
         [HttpGet] // facultatif car GET par défaut
         public virtual IActionResult Index()
         {       
-            var entities = Context.Set<T>().ToList();
+            var entities = BaseQuery().ToList();
             return View(entities);
         }
 
@@ -38,7 +41,7 @@ namespace Isen.Dotnet.Web.Controllers
             // Rechercher la personne ayant l'Id <id>
             return View(
                 // Contexte > Liste des personnes : prendre la 1ère entité qui...
-                Context.Set<T>().FirstOrDefault(
+                BaseQuery().FirstOrDefault(
                     // ... correspond à ce prédicat de recherche
                     e => e.Id == id));
         }
