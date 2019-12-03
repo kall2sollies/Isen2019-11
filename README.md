@@ -527,3 +527,7 @@ Répéter les mêmes étapes d'adaptation pour la ville de résidence.
 * Dans DataInitializer
 * Include dans PersonController
 * Tableau dans Index.cshtml
+
+## Formulaire d'édition du personne.
+
+Remplacer la zone de texte correspondant à la ville, par une liste déroulante.

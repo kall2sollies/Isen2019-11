@@ -2,7 +2,9 @@
     ViewData["Title"] = "Edition d'un personne";
 }
 @using Isen.Dotnet.Library.Model;
+@using Isen.Dotnet.Library.Context;
 @model Person;
+@inject ApplicationDbContext _context;
 
 <h2>Création ou édition <small>d'une personne</small></h2>
 <form class="form-group" asp-action="Edit">
@@ -40,25 +42,47 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="BirthCity">Ville de naissance</label>
-                <input
-                    id="BirthCity"
-                    type="text"
-                    class="form-control"
-                    placeholder="Ville de naissance"
-                    asp-for="BirthCity"
-                    value="@Model?.BirthCity" />
+                @Html.DropDownListFor(
+                    // Quel est le champ du modèle que l'on 
+                    // met à jour avec cette liste ?
+                    p => p.BirthCityId,
+                    // Liste des éléments
+                    new SelectList(
+                        // La liste
+                        _context.CityCollection,
+                        // Le champ d'id
+                        "Id",
+                        // Le champ de libellé
+                        "Name"
+                    ),
+                    // Item par défaut
+                    "Sélectionnez un ville...",
+                    // Classe CSS
+                    new { @class = "form-control" }
+                )
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="ResidenceCity">Ville de résidence</label>
-                <input
-                    id="ResidenceCity"
-                    type="text"
-                    class="form-control"
-                    placeholder="Ville de résidence"
-                    asp-for="ResidenceCity"
-                    value="@Model?.ResidenceCity" />
+                @Html.DropDownListFor(
+                    // Quel est le champ du modèle que l'on 
+                    // met à jour avec cette liste ?
+                    p => p.ResidenceCityId,
+                    // Liste des éléments
+                    new SelectList(
+                        // La liste
+                        _context.CityCollection,
+                        // Le champ d'id
+                        "Id",
+                        // Le champ de libellé
+                        "Name"
+                    ),
+                    // Item par défaut
+                    "Sélectionnez un ville...",
+                    // Classe CSS
+                    new { @class = "form-control" }
+                )
             </div>
         </div>
     </div>
