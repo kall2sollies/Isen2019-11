@@ -8,6 +8,7 @@ namespace Isen.Dotnet.Library.Context
     {        
         // Listes des classes modèle / tables
         public DbSet<Person> PersonCollection { get; set; }
+        public DbSet<City> CityCollection { get; set; }
 
         public ApplicationDbContext(
             [NotNullAttribute] DbContextOptions options) : 
@@ -30,6 +31,11 @@ namespace Isen.Dotnet.Library.Context
                 // pour les clés primaires ou étrangères
                 .HasKey(p => p.Id);
 
+            // Pareil pour City
+            modelBuilder
+                .Entity<City>()
+                .ToTable(nameof(City))
+                .HasKey(c => c.Id);
         }
 
     }

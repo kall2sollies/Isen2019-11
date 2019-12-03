@@ -481,3 +481,16 @@ Rétablir le drop/create de la base de données afin de tout retester.
 * Déplacer le `Edit(id)` de `PersonController` vers `BaseController`.  
 * Déplacer le `Edit(Person entity)`
 * Déplacer le `Delete(id)`
+
+## Ajout d'un nouveau model : City
+Nous allons répercuter cette nouvelle classe de modèle dans toutes les couches successives de l'architecture de l'app.  
+
+* Dans Library/Model, ajouter une classe `City` avec les champs `Name`, `Zip`, `Lat` et `Lon`.  
+* Dans `ApplicationDbContext`, déclarer le `DbSet<>` correspondant, et préciser la création de la table correspondant à ce modèle.  
+* Dans `DataInitializer`, prévoir une liste de villes, avec leurs coordonnées :
+  * `GetCities`, qui génère une liste statique de villes,
+  * `AddCities()`, qui ajoute dans la base de données ces villes, si elles ne sont pas déjà présentes.
+  * Ajouter la méthode `AddCities()` à l'interface `IDataInitializer`
+* Dans le projet Web, `Program.cs`, appeler `AddCities()`
+* Toujours dans le projet web, Créer `CityController` sur le modèle de `PersonController`.  
+* Dans `_Layout.cshtml`, modifier le menu en dupliquant la section Personnes et en l'adaptant pour les Villes.
