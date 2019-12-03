@@ -44,5 +44,19 @@ namespace Isen.Dotnet.Web.Controllers
                     // ... correspond à ce prédicat de recherche
                     person => person.Id == id));
         }
+
+        [HttpPost]
+        public IActionResult Edit(Person model)
+        {
+            if (model == null) return RedirectToAction("Index");
+            // Créer la personne
+            if (model?.Id == 0) _context.PersonCollection.Add(model);
+            // Mise à jour de la personne
+            else _context.PersonCollection.Update(model);
+            // Sauvegarder le contexte
+            _context.SaveChanges();
+            // Renvoyer à la liste
+            return RedirectToAction("Index");
+        }
     }
 }

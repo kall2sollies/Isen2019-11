@@ -427,3 +427,9 @@ naviguer vers le form d'édition.
 Utiliser les principes de mise en forme issus de la librairie bootstrap pour
 réaliser le formulaire d'édition complet d'une personne.
 
+#### Répondre à la soumission du formulaire
+* Dans le contrôleur, créer une surcharge de Edit, qui prend le contenu de formulaire
+posté, en POST.
+* Implémenter la sauvegarde :
+  * Mise à jour si Id > 0
+  * Création si Id = 0
