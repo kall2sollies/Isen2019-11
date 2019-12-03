@@ -3,7 +3,92 @@
 }
 @using Isen.Dotnet.Library.Model;
 @model Person;
-<div>
-    <h1>Création ou édition d'une personne</h1>
-    <p>@Model?.LastName</p>    
-</div>
+
+<h2>Création ou édition <small>d'une personne</small></h2>
+<form class="form-group" asp-action="Edit">
+
+    <h3>Identité <small>de la personne</small></h3>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="LastName">Nom de famille</label>
+                <input
+                    id="LastName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nom de famille"
+                    asp-for="LastName"
+                    value="@Model?.LastName" />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="FirstName">Prénom</label>
+                <input
+                    id="FirstName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Prénom"
+                    asp-for="FirstName"
+                    value="@Model?.FirstName" />
+            </div>
+        </div>
+    </div>
+
+    <h3>Villes <small>de la personne</small></h3>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="BirthCity">Ville de naissance</label>
+                <input
+                    id="BirthCity"
+                    type="text"
+                    class="form-control"
+                    placeholder="Ville de naissance"
+                    asp-for="BirthCity"
+                    value="@Model?.BirthCity" />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="ResidenceCity">Ville de résidence</label>
+                <input
+                    id="ResidenceCity"
+                    type="text"
+                    class="form-control"
+                    placeholder="Ville de résidence"
+                    asp-for="ResidenceCity"
+                    value="@Model?.ResidenceCity" />
+            </div>
+        </div>
+    </div>
+
+    @{
+        var dateTimeString = "";
+        if (Model?.DateOfBirth != null) 
+            dateTimeString = Model.DateOfBirth.Value.ToString("dd/MM/yyyy");
+    }
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="DateOfBirth">Date de naissance</label>
+                <input
+                    id="DateOfBirth"
+                    type="text"
+                    class="form-control"
+                    placeholder="jj/mm/aaaa"
+                    asp-for="DateOfBirth"
+                    value="@dateTimeString" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Valider</button>
+                <a class="btn btn-secondary" asp-action="Index">Annuler</a>
+            </div>
+        </div>
+    </div>
+
+</form>        

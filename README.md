@@ -408,6 +408,7 @@ Dans `Program.cs`, commenter les appels à Drop et Create.
 
 ### Formulaire d'édition
 
+#### Création du canvas d'édition (principe de fonctionnement)
 La liste des personnes a pour URL `/Person`, soit implicitement `/Person/Index`.  
 Dans `Startup.cs`, le schéma des routes est défini ainsi : 
 `{controller=Home}/{action=Index}/{id?}`
@@ -421,3 +422,8 @@ personne,
 naviguer vers le form d'édition.
 * Dans le menu, modifier l'entrée correspondant à "Personne" > "Nouvelle" afin que
 ça ouvre le même formulaire, mais sans id en param.
+
+#### Créer tous les contrôles d'édition
+Utiliser les principes de mise en forme issus de la librairie bootstrap pour
+réaliser le formulaire d'édition complet d'une personne.
+
