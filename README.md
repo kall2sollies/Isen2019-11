@@ -441,6 +441,7 @@ l'action `Delete`, et le passage de l'id de la personne à supprimer en param.
 
 ## Généralisation du contrôleur
 
+### Hiérarchie des types de contrôleurs
 * Dans le contrôleur, remplacer les références à `_context.PersonCollection` 
 par `_context.Set<Person>()` et retester le fonctionnement (CRUD).  
 * Renommer les variables trop spécifiques...
@@ -463,3 +464,20 @@ PersonController : BaseController<Person> : Controller
   * Créer un constructeur dans `BaseController`, et le rappeler depuis `PersonController`,
   * Changer la protection de ces 2 membres de `private` à `protected`.
 * Déplacver la méthode Index()
+
+### Généralisation des modèles (ou entités)
+A partir de ce stade, le type générique `T` n'est plus suffisamment précisé
+car on va avoir besoin d'accéder à son champ Id (exemple : Person.Id).
+
+Dans Library/Model, créer une classe `BaseEntity` constituée uniquement du champ
+`Id`, et faire dériver `Person` de ce nouveau type.  
+
+Dans `BaseController`, faire évoluer la contrainte sur `T` en précisant que maintenant, 
+`where T : BaseEntity`.
+
+Rétablir le drop/create de la base de données afin de tout retester.
+
+### Généraliser les autres méthodes du contrôleur
+* Déplacer le `Edit(id)` de `PersonController` vers `BaseController`.  
+* Déplacer le `Edit(Person entity)`
+* Déplacer le `Delete(id)`
