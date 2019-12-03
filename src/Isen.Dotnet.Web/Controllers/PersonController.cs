@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Isen.Dotnet.Library.Context;
+using Isen.Dotnet.Library.Model;
 using Isen.Dotnet.Library.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,6 +29,20 @@ namespace Isen.Dotnet.Web.Controllers
             var persons = _context.PersonCollection.ToList();
             _logger.LogDebug($"Passage de {persons.Count} personnes à la vue");
             return View(persons);
+        }
+
+        // https://localhost:5001/Person/Edit/42
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            // Pas d'id : formulaire vierge (création)
+            if (id == null) return View();
+            // Rechercher la personne ayant l'Id <id>
+            return View(
+                // Contexte > Liste des personnes : prendre la 1ère personne qui...
+                _context.PersonCollection.FirstOrDefault(
+                    // ... correspond à ce prédicat de recherche
+                    person => person.Id == id));
         }
     }
 }

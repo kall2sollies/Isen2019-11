@@ -30,7 +30,9 @@
                 <td>@person.ResidenceCity</td>
                 <td>
                     <a class="btn btn-outline-primary"
-                     href="#">Modifier</a>
+                        asp-controller="Person"
+                        asp-action="Edit"
+                        asp-route-id="@person.Id">Modifier</a>
                     <a class="btn btn-outline-danger"
                      href="#">Supprimer</a>
                 </td>

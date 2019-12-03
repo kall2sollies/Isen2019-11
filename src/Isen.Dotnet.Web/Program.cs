@@ -26,8 +26,8 @@ namespace Isen.Dotnet.Web
             {
                 var dataInitializer = serviceScope
                     .ServiceProvider.GetService<IDataInitializer>();
-                dataInitializer.DropDatabase();
-                dataInitializer.CreateDatabase();
+                //dataInitializer.DropDatabase();
+                //dataInitializer.CreateDatabase();
                 dataInitializer.AddPersons();
             }
             // l'exécuter

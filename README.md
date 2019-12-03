@@ -402,3 +402,22 @@ Via le pattern d'injection de dépendance, fournir à `PersonController` une ins
 Remplacer alors le code de l'action Index afin qu'elle prenne ses données dans l'instance du contexte.  
 
 Retirer l'injection de DataInitializer, qui est devenue obsolète.  
+
+### Désactiver la reconstruction de la base.
+Dans `Program.cs`, commenter les appels à Drop et Create.
+
+### Formulaire d'édition
+
+La liste des personnes a pour URL `/Person`, soit implicitement `/Person/Index`.  
+Dans `Startup.cs`, le schéma des routes est défini ainsi : 
+`{controller=Home}/{action=Index}/{id?}`
+
+Le formulaire d'édition aura pour URL `/Person/Edit/45`.  
+
+* Créer l'action du contrôleur permettant de passer à la vue les données d'UNE
+personne,
+* Créer l'action Edit dans le dossier des vues Person (dupliquer la vue Index)
+* Dans l'action Index, modifier le lien généré sur le bouton "Modifier" afin de 
+naviguer vers le form d'édition.
+* Dans le menu, modifier l'entrée correspondant à "Personne" > "Nouvelle" afin que
+ça ouvre le même formulaire, mais sans id en param.
