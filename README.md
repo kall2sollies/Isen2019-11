@@ -485,6 +485,7 @@ Rétablir le drop/create de la base de données afin de tout retester.
 ## Ajout d'un nouveau model : City
 Nous allons répercuter cette nouvelle classe de modèle dans toutes les couches successives de l'architecture de l'app.  
 
+### Couches en C#
 * Dans Library/Model, ajouter une classe `City` avec les champs `Name`, `Zip`, `Lat` et `Lon`.  
 * Dans `ApplicationDbContext`, déclarer le `DbSet<>` correspondant, et préciser la création de la table correspondant à ce modèle.  
 * Dans `DataInitializer`, prévoir une liste de villes, avec leurs coordonnées :
@@ -493,4 +494,8 @@ Nous allons répercuter cette nouvelle classe de modèle dans toutes les couches
   * Ajouter la méthode `AddCities()` à l'interface `IDataInitializer`
 * Dans le projet Web, `Program.cs`, appeler `AddCities()`
 * Toujours dans le projet web, Créer `CityController` sur le modèle de `PersonController`.  
+
+# Vues en CSHTML
 * Dans `_Layout.cshtml`, modifier le menu en dupliquant la section Personnes et en l'adaptant pour les Villes.
+* Dans le dossier des `Views`, créer le dossier `City`, puis dupliquer `Person/Index.cshtml` à l'intérieur, et adapter. 
+* Dupliquer aussi `Edit.cshtml` et adapter le formulaire en conséquence.
