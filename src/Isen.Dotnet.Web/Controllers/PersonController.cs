@@ -8,27 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Isen.Dotnet.Web.Controllers
 {
-    public class PersonController : Controller
+    public class PersonController : BaseController<Person>
     {
-        private readonly ILogger<PersonController> _logger;
-        private readonly ApplicationDbContext _context;
-
         public PersonController(
             ILogger<PersonController> logger,
-            ApplicationDbContext context)
+            ApplicationDbContext context) : base(logger, context)
         {
-            _logger = logger;
-            _context = context;
-        }
-
-        // https://localhost:5001/Person/Index
-        [HttpGet] // facultatif car GET par défaut
-        public IActionResult Index()
-        {       
-            _logger.LogInformation("Appel de /person/index");
-            var persons = _context.PersonCollection.ToList();
-            _logger.LogDebug($"Passage de {persons.Count} personnes à la vue");
-            return View(persons);
+            Logger.LogDebug("PersonController/constructeur");
         }
 
         // https://localhost:5001/Person/Edit/42
@@ -40,21 +26,21 @@ namespace Isen.Dotnet.Web.Controllers
             // Rechercher la personne ayant l'Id <id>
             return View(
                 // Contexte > Liste des personnes : prendre la 1ère personne qui...
-                _context.PersonCollection.FirstOrDefault(
+                Context.Set<Person>().FirstOrDefault(
                     // ... correspond à ce prédicat de recherche
-                    person => person.Id == id));
+                    e => e.Id == id));
         }
 
         [HttpPost]
-        public IActionResult Edit(Person model)
+        public IActionResult Edit(Person entity)
         {
-            if (model == null) return RedirectToAction("Index");
+            if (entity == null) return RedirectToAction("Index");
             // Créer la personne
-            if (model?.Id == 0) _context.PersonCollection.Add(model);
+            if (entity?.Id == 0) Context.Set<Person>().Add(entity);
             // Mise à jour de la personne
-            else _context.PersonCollection.Update(model);
+            else Context.Set<Person>().Update(entity);
             // Sauvegarder le contexte
-            _context.SaveChanges();
+            Context.SaveChanges();
             // Renvoyer à la liste
             return RedirectToAction("Index");
         }
@@ -63,12 +49,12 @@ namespace Isen.Dotnet.Web.Controllers
         public IActionResult Delete(int id)
         {
             // Trouver la personne à supprimer
-            var person = _context.PersonCollection
-                .FirstOrDefault(p => p.Id == id);
+            var entity = Context.Set<Person>()
+                .FirstOrDefault(e => e.Id == id);
             // Supprimer la personne
-            if (person != null) _context.PersonCollection.Remove(person);
+            if (entity != null) Context.Set<Person>().Remove(entity);
             // Sauvegarder
-            _context.SaveChanges();
+            Context.SaveChanges();
             // Renvoyer vers la liste
             return RedirectToAction("Index");
         }

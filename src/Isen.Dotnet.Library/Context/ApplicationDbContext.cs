@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Isen.Dotnet.Library.Context
 {    
     public class ApplicationDbContext : DbContext
-    {
-        
+    {        
         // Listes des classes modèle / tables
         public DbSet<Person> PersonCollection { get; set; }
 

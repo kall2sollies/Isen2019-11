@@ -438,3 +438,28 @@ posté, en POST.
 * Dans la liste de `Index.cshtml`, ajouter au bouton de suppression l'envoi vers
 l'action `Delete`, et le passage de l'id de la personne à supprimer en param.
 * Dans le contrôleur, implémenter l'action `Delete(id)`. 
+
+## Généralisation du contrôleur
+
+* Dans le contrôleur, remplacer les références à `_context.PersonCollection` 
+par `_context.Set<Person>()` et retester le fonctionnement (CRUD).  
+* Renommer les variables trop spécifiques...
+* Dans le dossier des contrôleurs, créer une classe abstraite `BaseController<T>`
+et faire dériver `PersonController` de `BaseController<Person>`.  
+`BaseController<T>` dérive quant à lui de `Controller` car `PersonController` dérivait
+de `Controller`.  
+
+
+La hiéarchie des types passe de :
+````csharp
+PersonController : Controller
+```` 
+à 
+````csharp
+PersonController : BaseController<Person> : Controller
+```` 
+
+* Déplacer `_context` et `_logger` vers `BaseController`. Ceci oblige à :
+  * Créer un constructeur dans `BaseController`, et le rappeler depuis `PersonController`,
+  * Changer la protection de ces 2 membres de `private` à `protected`.
+* Déplacver la méthode Index()
