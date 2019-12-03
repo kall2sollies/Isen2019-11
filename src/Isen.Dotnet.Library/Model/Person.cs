@@ -8,8 +8,12 @@ namespace Isen.Dotnet.Library.Model
         public string FirstName {get;set;}
         public string LastName {get;set;}
         public DateTime? DateOfBirth {get;set;}
-        public string BirthCity {get;set;}
-        public string ResidenceCity {get;set;}
+
+        public City BirthCity {get;set;}
+        public int? BirthCityId {get;set;}
+
+        public City ResidenceCity {get;set;}
+        public int? ResidenceCityId {get;set;}
         
         [NotMapped] // ne pas générer ce champ dans la bdd
         public int? Age => DateOfBirth.HasValue ?

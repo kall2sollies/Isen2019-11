@@ -32,16 +32,6 @@ namespace Isen.Dotnet.Library.Services
             "Sarrazin",
             "Vu Dinh"
         };
-        private List<string> _cities => new List<string>
-        {
-            "Toulon",
-            "Nice",
-            "Marseille",
-            "Lyon",
-            "Bordeaux",
-            "Toulouse",
-            "Lille"
-        };
         // Générateur aléatoire
         private readonly Random _random;
 
@@ -64,8 +54,15 @@ namespace Isen.Dotnet.Library.Services
         private string RandomLastName => 
             _lastNames[_random.Next(_lastNames.Count)];
         // Générateur de ville
-        private string RandomCity => 
-            _cities[_random.Next(_cities.Count)];
+        private City RandomCity
+        {
+            get
+            {
+                var cities = _context.CityCollection.ToList();
+                return cities[_random.Next(cities.Count)];
+            }
+        }
+
         // Générateur de date
         private DateTime RandomDate =>
             new DateTime(_random.Next(1980, 2010), 1, 1)

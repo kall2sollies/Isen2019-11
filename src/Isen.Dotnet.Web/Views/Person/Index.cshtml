@@ -25,8 +25,8 @@
                 <td>@person.LastName</td>
                 <td>@person.FirstName</td>
                 <td>@person.DateOfBirth.Value.ToShortDateString() (@person.Age ans)</td>
-                <td>@person.BirthCity</td>
-                <td>@person.ResidenceCity</td>
+                <td>@person.BirthCity?.Name</td>
+                <td>@person.ResidenceCity?.Name</td>
                 <td>
                     <a class="btn btn-outline-primary"
                         asp-controller="Person"

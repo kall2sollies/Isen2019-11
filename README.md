@@ -507,3 +507,23 @@ Dans la classe `BaseController`, créer une méthode `BaseQuery` protected et vi
 
 Utiliser cette méthode dans `Index`, et `Edit(id)`.  
 
+## Ajout d'une relation dans Person, pour la ville de naissance
+
+Nous allons créer une relation 1..n entre Person et City, au travers de la ville de naissance.
+
+* Dans le modèle `Person.cs`, changer le type de `BirthCity`, afin que ce soit un type `City`, et ajouter un champ `BirthCityId`, qui va correspondre à la clé étrangère de cette relation.
+* Dans `ApplicationDbContext`, préciser la relation au travers de la clé étrangère.
+* Adapter `DataInitiliazer` :
+  * Adapter RandomCity : prendre une ville aléatoirement dans la liste des villes générées en base de données
+  * Adapter RandomPerson : utiliser RandomCity ou RandomCity.Name, selon le cas.
+* Adapter Views/Person/Index car le tableau utilise encore la ville au format string.
+* Adapter `PersonController`, en incluant City dans la relation Person lors des requêtes.
+
+## Même chose pour la ville de résidence
+
+Répéter les mêmes étapes d'adaptation pour la ville de résidence.
+* Dans la classe Person
+* Dans ApplicationDbContext
+* Dans DataInitializer
+* Include dans PersonController
+* Tableau dans Index.cshtml
