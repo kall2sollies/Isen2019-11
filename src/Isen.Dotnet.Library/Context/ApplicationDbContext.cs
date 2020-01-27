@@ -9,6 +9,7 @@ namespace Isen.Dotnet.Library.Context
         // Listes des classes modèle / tables
         public DbSet<Person> PersonCollection { get; set; }
         public DbSet<Service> ServiceCollection { get; set; }
+        public DbSet<Role> RoleCollection { get; set; }
 
         public ApplicationDbContext(
             [NotNullAttribute] DbContextOptions options) : 
@@ -49,6 +50,11 @@ namespace Isen.Dotnet.Library.Context
                 .Entity<Service>()
                 .ToTable(nameof(Service))
                 .HasKey(s => s.Id);
+
+            modelBuilder
+                .Entity<Role>()
+                .ToTable(nameof(Role))
+                .HasKey(r => r.Id);
         }
 
     }
