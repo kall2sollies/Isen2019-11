@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Liste des services";
+}
+@using Isen.Dotnet.Library.Model;
+@model IEnumerable<Service>;
+<div>
+    <h1>Liste <small>des services</small></h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var service in Model)
+            {
+            <tr>
+                <th scope="row">@service.Id</th>
+                <td>@service.Name</td>
+                <td>
+                    <a class="btn btn-outline-primary"
+                        asp-controller="Service"
+                        asp-action="Edit"
+                        asp-route-id="@service.Id">Modifier</a>
+                    <a class="btn btn-outline-danger"
+                        asp-controller="Service"
+                        asp-action="Delete"
+                        asp-route-id="@service.Id">Supprimer</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
