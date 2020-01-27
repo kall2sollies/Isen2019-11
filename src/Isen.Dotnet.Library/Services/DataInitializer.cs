@@ -44,6 +44,21 @@ namespace Isen.Dotnet.Library.Services
             "Administration"
         };
 
+        private List<string> _roleNames => new List<string>
+        {
+            "Responsable",
+            "Assistant",
+            "Chef de produit",
+            "Chef de projet",
+            "Maitre de l'air",
+            "Développeur fullstack",
+            "Développeur frontend",
+            "Développeur backend",
+            "Administrateur",
+            "Testeur",
+            "Stagiaire"
+        };
+
         // Générateur aléatoire
         private readonly Random _random;
 
@@ -114,7 +129,17 @@ namespace Isen.Dotnet.Library.Services
             }
             return services;
         }
-            
+
+        public List<Role> GetRoles()
+        {
+            var roles = new List<Role>();
+            int nbRoles = _roleNames.Count();
+            for (var i = 0; i < nbRoles; i++)
+            {
+                roles.Add(new Role(_roleNames[i]));
+            }
+            return roles;
+        }   
 
         public void DropDatabase()
         {
@@ -147,6 +172,15 @@ namespace Isen.Dotnet.Library.Services
             if (_context.ServiceCollection.Any()) return;
             var services = GetServices();
             _context.AddRange(services);
+            _context.SaveChanges();
+        }
+
+        public void AddRoles()
+        {
+            _logger.LogWarning("Adding roles...");
+            if (_context.RoleCollection.Any()) return;
+            var roles = GetRoles();
+            _context.AddRange(roles);
             _context.SaveChanges();
         }
     }
