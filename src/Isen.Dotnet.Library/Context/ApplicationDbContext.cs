@@ -24,18 +24,13 @@ namespace Isen.Dotnet.Library.Context
                 // Associer la classe Person...
                 .Entity<Person>()
                 // ... à la table Person
-                .ToTable(nameof(Person))
+                .ToTable(nameof(Person));
                 // Description de la relation Person.BirthCity
-                .HasOne(p => p.BirthCity)
+                //.HasOne(p => p.BirthCity)
                 // Relation réciproque (omise)
-                .WithMany()
+                //.WithMany()
                 // Clé étrangère qui porte cette relation
-                .HasForeignKey(p => p.BirthCityId);
-            // Pareil pour ResidenceCity
-            modelBuilder.Entity<Person>()
-                .HasOne(p => p.ResidenceCity)
-                .WithMany()
-                .HasForeignKey(p => p.ResidenceCityId);
+                //.HasForeignKey(p => p.BirthCityId);
             // Et utiliser le champ Id comme clé primaire
             // Déclaration optionnelle, car le nommage
             // Id ou PersonId est reconnu comme convention
@@ -43,11 +38,16 @@ namespace Isen.Dotnet.Library.Context
             modelBuilder.Entity<Person>()
                 .HasKey(p => p.Id);
 
+            // Pareil pour ResidenceCity
+            //modelBuilder.Entity<Person>()
+                //.HasOne(p => p.ResidenceCity)
+                //.WithMany()
+                //.HasForeignKey(p => p.ResidenceCityId);
             // Pareil pour City
-            modelBuilder
-                .Entity<City>()
-                .ToTable(nameof(City))
-                .HasKey(c => c.Id);
+            //modelBuilder
+                //.Entity<City>()
+                //.ToTable(nameof(City))
+                //.HasKey(c => c.Id);
         }
 
     }
