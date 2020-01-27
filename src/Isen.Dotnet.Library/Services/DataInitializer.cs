@@ -33,6 +33,17 @@ namespace Isen.Dotnet.Library.Services
             "Vu Dinh"
         };
 
+        private List<string> _serviceNames => new List<string>
+        {
+            "Marketing",
+            "Développement",
+            "Commercial",
+            "Maîtrise d'ouvrage",
+            "Référenceur",
+            "Designer",
+            "Administration"
+        };
+
         // Générateur aléatoire
         private readonly Random _random;
 
@@ -64,16 +75,15 @@ namespace Isen.Dotnet.Library.Services
         // Générateur de personne
         private Person RandomPerson()
         {
-            Person Person =  new Person();
-            string FirstName = RandomFirstName;
-            string LastName = RandomLastName;
-            Person.FirstName = FirstName;
-            Person.LastName = LastName;
-            Person.DateOfBirth = RandomDate;
-            Person.Telephone = RandomTelephone;
-            Person.Email = FirstName.ToLower() + '.' + LastName.ToLower() + "@isen.yncrea.fr";
-
-            return Person;
+            Person person =  new Person();
+            string firstName = RandomFirstName;
+            string lastName = RandomLastName;
+            person.FirstName = firstName;
+            person.LastName = lastName;
+            person.DateOfBirth = RandomDate;
+            person.Telephone = RandomTelephone;
+            person.Email = firstName.ToLower() + '.' + lastName.ToLower() + "@isen.yncrea.fr";
+            return person;
         }
 
         // Générateur de personnes
@@ -86,6 +96,25 @@ namespace Isen.Dotnet.Library.Services
             }
             return persons;
         }
+
+        private Service OneService(string name)
+        {
+            Service service = new Service();
+            service.Name = name;
+            return service;
+        }
+
+        public List<Service> GetServices()
+        {
+            var services = new List<Service>();
+            int totalService = _serviceNames.Count();
+            for (var i = 0; i < totalService; i++)
+            {
+                services.Add(OneService(_serviceNames[i]));
+            }
+            return services;
+        }
+            
 
         public void DropDatabase()
         {
@@ -109,6 +138,15 @@ namespace Isen.Dotnet.Library.Services
             // Les ajouter au contexte
             _context.AddRange(persons);
             // Sauvegarder le contexte
+            _context.SaveChanges();
+        }
+
+        public void AddServices()
+        {
+            _logger.LogWarning("Adding services...");
+            if (_context.ServiceCollection.Any()) return;
+            var services = GetServices();
+            _context.AddRange(services);
             _context.SaveChanges();
         }
     }
