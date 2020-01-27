@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Isen.Dotnet.Library.Services;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Isen.Dotnet.Web
 {
@@ -28,7 +23,6 @@ namespace Isen.Dotnet.Web
                     .ServiceProvider.GetService<IDataInitializer>();
                 dataInitializer.DropDatabase();
                 dataInitializer.CreateDatabase();
-                dataInitializer.AddCities();
                 dataInitializer.AddPersons();
             }
             // l'exécuter

@@ -37,52 +37,30 @@
         </div>
     </div>
 
-    <h3>Villes <small>de la personne</small></h3>
+    <h3>Contacts <small>de la personne</small></h3>
     <div class="row">
         <div class="col-6">
             <div class="form-group">
-                <label for="BirthCity">Ville de naissance</label>
-                @Html.DropDownListFor(
-                    // Quel est le champ du modèle que l'on 
-                    // met à jour avec cette liste ?
-                    p => p.BirthCityId,
-                    // Liste des éléments
-                    new SelectList(
-                        // La liste
-                        _context.CityCollection,
-                        // Le champ d'id
-                        "Id",
-                        // Le champ de libellé
-                        "Name"
-                    ),
-                    // Item par défaut
-                    "Sélectionnez un ville...",
-                    // Classe CSS
-                    new { @class = "form-control" }
-                )
+                <label for="Telephone">Telephone</label>
+                <input
+                    id="Telephone"
+                    type="text"
+                    class="form-control"
+                    placeholder="Téléphone"
+                    asp-for="Telephone"
+                    value="@Model?.Telephone" />
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
-                <label for="ResidenceCity">Ville de résidence</label>
-                @Html.DropDownListFor(
-                    // Quel est le champ du modèle que l'on 
-                    // met à jour avec cette liste ?
-                    p => p.ResidenceCityId,
-                    // Liste des éléments
-                    new SelectList(
-                        // La liste
-                        _context.CityCollection,
-                        // Le champ d'id
-                        "Id",
-                        // Le champ de libellé
-                        "Name"
-                    ),
-                    // Item par défaut
-                    "Sélectionnez un ville...",
-                    // Classe CSS
-                    new { @class = "form-control" }
-                )
+                <label for="Email">Email</label>
+                <input
+                    id="Email"
+                    type="email"
+                    class="form-control"
+                    placeholder="EMail"
+                    asp-for="Email"
+                    value="@Model?.Email" />
             </div>
         </div>
     </div>
